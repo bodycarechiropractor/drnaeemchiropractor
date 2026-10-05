@@ -347,16 +347,23 @@
             }
         }
     </style>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0f766e">
 </head>
-<body>
+<body class="dark-mode">
 
     <!-- Navbar -->
     <header class="navbar">
         <div class="container">
             <a href="index.html" class="logo-area">
                 <div class="logo-img">
-                    <img src="dr.png" alt="Dr. Naeem Shaikh Chiropractor" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <i class="fas fa-user-md" style="font-size:24px; display:none;"></i>
+                    <img src="logo.png" alt="Dr. Naeem Chiropractor Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <i class="fas fa-spa" style="display:none;"></i>
                 </div>
                 <div class="logo-text">Dr. Naeem Chiropractor<span>“Freedom From Pain — Naturally”</span></div>
             </a>
@@ -503,8 +510,8 @@
         // Check local storage for dark mode
         (function() {
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
+            if (savedTheme === 'light') {
+                document.body.classList.remove('dark-mode');
             }
         })();
 
