@@ -294,12 +294,130 @@
             font-weight: 900;
             color: #0f172a;
             line-height: 1.2;
-            margin-bottom: 12px;
+            margin-bottom: 6px;
             max-width: 780px;
             margin-left: auto;
             margin-right: auto;
         }
         body.dark-mode .hero-title { color: #f8fafc; }
+        
+        /* Hero Doctor Avatar & Badges */
+        .hero-doctor-avatar {
+            position: relative;
+            width: 125px;
+            height: 125px;
+            margin: 6px auto 14px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, #0f766e 0%, #34d399 50%, #0284c7 100%);
+            box-shadow: 0 10px 30px rgba(15, 118, 110, 0.4);
+        }
+        .hero-doctor-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            background: #ffffff;
+        }
+        .hero-avatar-verified {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            background: #0f766e;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            border: 2px solid #0f172a;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        body:not(.dark-mode) .hero-avatar-verified {
+            border-color: #ffffff;
+        }
+        .hero-doctor-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .hero-degree-pill, .hero-spec-pill {
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .hero-degree-pill {
+            background: rgba(2, 132, 199, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        body:not(.dark-mode) .hero-degree-pill {
+            background: #e0f2fe;
+            color: #0369a1;
+            border-color: #bae6fd;
+        }
+        .hero-spec-pill {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+        body:not(.dark-mode) .hero-spec-pill {
+            background: #dcfce7;
+            color: #15803d;
+            border-color: #bbf7d0;
+        }
+        .hero-tagline {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #f1f5f9;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        body:not(.dark-mode) .hero-tagline {
+            color: #1e293b;
+        }
+        .hero-tags-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+        .hero-tags-row span {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #94a3b8;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .hero-tags-row span i {
+            color: #34d399;
+        }
+        body:not(.dark-mode) .hero-tags-row span {
+            color: #475569;
+            background: #f1f5f9;
+            border-color: #e2e8f0;
+        }
+        body:not(.dark-mode) .hero-tags-row span i {
+            color: #0f766e;
+        }
+
         .gradient-text {
             background: linear-gradient(135deg, #0f766e 0%, #0284c7 100%);
             -webkit-background-clip: text;
@@ -840,21 +958,19 @@
 
         /* Responsive tweaks */
         @media (max-width: 600px) {
-            .hero-title { font-size: 1.85rem; }
-            .hero-subtext { font-size: 0.92rem; }
-            .hero-cta-group { gap: 8px; }
+            .hero-doctor-avatar { width: 105px; height: 105px; margin: 4px auto 12px; }
+            .hero-title { font-size: 1.75rem; }
+            .hero-tagline { font-size: 1.15rem; }
+            .hero-subtext { font-size: 0.88rem; margin-bottom: 16px; line-height: 1.5; }
+            .hero-tags-row { gap: 6px; margin-bottom: 18px; }
+            .hero-tags-row span { font-size: 0.72rem; padding: 3px 8px; }
+            .hero-cta-group { gap: 8px; margin-bottom: 24px; }
             .btn-hero-primary, .btn-hero-secondary {
-                padding: 11px 18px;
+                padding: 11px 16px;
                 font-size: 0.85rem;
                 flex: 1;
                 justify-content: center;
             }
-            .doctor-feature-card {
-                padding: 20px 16px;
-                text-align: center;
-            }
-            .doctor-points-list {
-                justify-content: center;
             }
         }
     </style>
@@ -883,7 +999,7 @@
         </div>
     </header>
 
-    <!-- Modern Hero Section (drrajneeshkant style) -->
+    <!-- Modern Hero Section (Dr. Naeem Personal Specialist Hero) -->
     <section class="hero-section">
         <div class="container">
             
@@ -891,16 +1007,41 @@
             <div class="hero-badge">
                 <i class="fas fa-sparkles"></i> Aurangabad's Leading Chiropractic Specialist
             </div>
+
+            <!-- Doctor Portrait Avatar with Verified Badge -->
+            <div class="hero-doctor-avatar">
+                <img src="dr.png" alt="Dr. Naeem Shaikh - Chiropractor in Aurangabad">
+                <div class="hero-avatar-verified" title="Verified Specialist"><i class="fas fa-check"></i></div>
+            </div>
             
-            <!-- Main Title with Gradient Accent -->
+            <!-- Main Doctor Name -->
             <h1 class="hero-title">
-                Comprehensive <span class="gradient-text">Spine & Chiropractic Care</span>
+                Dr. Naeem Shaikh
             </h1>
+
+            <!-- Qualifications & Medical Specialty Meta -->
+            <div class="hero-doctor-meta">
+                <span class="hero-degree-pill"><i class="fas fa-graduation-cap"></i> BPT. ND. MD,su.</span>
+                <span class="hero-spec-pill"><i class="fas fa-user-md"></i> Senior Consultant Chiropractor</span>
+            </div>
             
-            <!-- Subtitle -->
+            <!-- Spine Care Subtitle Tagline -->
+            <h2 class="hero-tagline">
+                Comprehensive <span class="gradient-text">Spine & Chiropractic Care</span>
+            </h2>
+            
+            <!-- Brief Doctor Bio Subtext -->
             <p class="hero-subtext">
-                Advanced, drug-free spinal adjustments and natural pain relief by <strong>Dr. Naeem Shaikh</strong> at Bodycare Chiropractic & Spine Centre. Restore your mobility without surgery or pills.
+                Advanced, drug-free spinal adjustments and natural pain relief by <strong>Dr. Naeem Shaikh</strong> at Bodycare Chiropractic & Spine Centre, Aurangabad. Restoring mobility without surgery or pills.
             </p>
+
+            <!-- Key Specialty Tags Row -->
+            <div class="hero-tags-row">
+                <span><i class="fas fa-check-circle"></i> Non-Surgical</span>
+                <span><i class="fas fa-check-circle"></i> Spinal Adjustments</span>
+                <span><i class="fas fa-check-circle"></i> Sciatica & Disc Care</span>
+                <span><i class="fas fa-check-circle"></i> Posture Correction</span>
+            </div>
             
             <!-- Side-by-Side Action Buttons -->
             <div class="hero-cta-group">
@@ -943,30 +1084,6 @@
     </section>
 
     <main class="container">
-        
-        <!-- Dedicated Meet Dr. Naeem Shaikh Section -->
-        <section class="doctor-section">
-            <div class="doctor-feature-card">
-                <div class="doctor-feature-avatar">
-                    <img src="dr.png" alt="Dr. Naeem Shaikh - Chiropractor in Aurangabad">
-                    <div class="avatar-badge-verified"><i class="fas fa-check"></i></div>
-                </div>
-                <div class="doctor-feature-info">
-                    <div class="doctor-badge-title"><i class="fas fa-user-md"></i> Senior Consultant Chiropractor</div>
-                    <h2 class="doctor-feature-name">Dr. Naeem Shaikh</h2>
-                    <div class="doctor-degrees-text"><i class="fas fa-graduation-cap"></i> BPT. ND. MD,su.</div>
-                    <p class="doctor-feature-bio">
-                        Dr. Naeem Shaikh is one of the most trusted and experienced chiropractors in Chhatrapati Sambhajinagar (Aurangabad). Practicing at <strong>Bodycare Chiropractic & Spine Centre</strong> since 2015, he has helped more than 5,000 patients achieve freedom from chronic back pain, cervical spine issues, and sciatica without painful surgeries or medication.
-                    </p>
-                    <ul class="doctor-points-list">
-                        <li><i class="fas fa-check-circle"></i> Manual Spinal Adjustments</li>
-                        <li><i class="fas fa-check-circle"></i> Posture Correction</li>
-                        <li><i class="fas fa-check-circle"></i> Drug-Free Pain Relief</li>
-                        <li><i class="fas fa-check-circle"></i> Decompression Therapy</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
 
         <!-- Clinic Timing Card -->
         <div class="clinic-timing">
