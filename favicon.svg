@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f766e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#14b8a6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="url(#grad)" stroke="#ffffff" stroke-width="2"/>
+  
+  <!-- Spine/Chiropractic Symbol -->
+  <path d="M 35 25 L 65 25" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 35 35 L 65 35" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Central body/spine icon -->
+  <rect x="47" y="25" width="6" height="50" rx="3" fill="#ffffff"/>
+  
+  <!-- Rib cage lines -->
+  <path d="M 35 45 L 25 40" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 65 45 L 75 40" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 35 55 L 25 60" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 65 55 L 75 60" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Head (top) -->
+  <circle cx="50" cy="20" r="6" fill="#ffffff"/>
+  
+  <!-- Bottom curve -->
+  <path d="M 45 75 Q 50 85 55 75" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  
+  <!-- Leaves/wellness symbol -->
+  <path d="M 30 70 Q 25 65 28 60 Q 33 63 30 70" fill="#a7f3d0"/>
+  <path d="M 70 70 Q 75 65 72 60 Q 67 63 70 70" fill="#a7f3d0"/>
+</svg>
