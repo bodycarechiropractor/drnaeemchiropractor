@@ -62,7 +62,7 @@
             {
               "@type": "EducationalOccupationalCredential",
               "credentialCategory": "degree",
-              "name": "BPT, ND, MD(su)"
+              "name": "BPT | ND | MD, su."
             }
           ],
           "worksFor": {
@@ -1168,7 +1168,275 @@
             background: #273549;
             border-color: #475569;
         }
-        body.dark-mode .social-btn.phone i { color: #34d399; }
+        /* Clinic & Treatment Bento Gallery */
+        .gallery-section {
+            padding: 30px 0;
+        }
+        .bento-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+        @media (min-width: 680px) {
+            .bento-gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+        }
+        @media (min-width: 990px) {
+            .bento-gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 18px;
+            }
+        }
+        .bento-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #f1f5f9;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            aspect-ratio: 1 / 1.05;
+            transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease, border-color 0.2s ease;
+        }
+        body.dark-mode .bento-card {
+            background: #1e293b;
+            border-color: #334155;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+        }
+        .bento-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 14px 30px rgba(15, 118, 110, 0.18);
+            border-color: #0f766e;
+        }
+        body.dark-mode .bento-card:hover {
+            border-color: #34d399;
+            box-shadow: 0 14px 30px rgba(52, 211, 153, 0.18);
+        }
+        .bento-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .bento-card:hover img {
+            transform: scale(1.06);
+        }
+        .bento-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(15, 23, 42, 0.78) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 12px;
+            opacity: 0;
+            transition: opacity 0.22s ease;
+        }
+        .bento-card:hover .bento-card-overlay {
+            opacity: 1;
+        }
+        @media (max-width: 600px) {
+            .bento-card-overlay {
+                opacity: 1;
+                padding: 8px;
+            }
+        }
+        .bento-zoom-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.85);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.22s, transform 0.22s;
+        }
+        .bento-card:hover .bento-zoom-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .bento-card-tag {
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        @media (min-width: 900px) {
+            .bento-card.bento-featured-wide {
+                grid-column: span 2;
+                aspect-ratio: 2 / 1.05;
+            }
+        }
+        .gallery-load-more-wrap {
+            text-align: center;
+            margin-top: 24px;
+        }
+        .btn-gallery-more {
+            background: white;
+            color: #0f766e;
+            border: 2px solid #0f766e;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.1);
+            transition: all 0.2s ease;
+        }
+        .btn-gallery-more:hover {
+            background: #0f766e;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(15, 118, 110, 0.25);
+        }
+        body.dark-mode .btn-gallery-more {
+            background: #1e293b;
+            color: #34d399;
+            border-color: #34d399;
+        }
+        body.dark-mode .btn-gallery-more:hover {
+            background: #34d399;
+            color: #0f172a;
+        }
+        .gallery-loading {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 24px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        /* Clinic Gallery Lightbox Modal */
+        .gallery-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+        .gallery-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .gallery-lightbox-card {
+            position: relative;
+            max-width: 92vw;
+            max-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: scale(0.92);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .gallery-modal-overlay.active .gallery-lightbox-card {
+            transform: scale(1);
+        }
+        .gallery-lightbox-img {
+            max-width: 90vw;
+            max-height: 80vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.15);
+            display: block;
+        }
+        .gallery-modal-close {
+            position: absolute;
+            top: -16px;
+            right: -16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.9);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: all 0.2s;
+        }
+        .gallery-modal-close:hover {
+            background: #0f766e;
+            transform: rotate(90deg) scale(1.08);
+        }
+        .gallery-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            z-index: 9;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: all 0.2s;
+        }
+        .gallery-nav-btn:hover {
+            background: #0f766e;
+            transform: translateY(-50%) scale(1.1);
+        }
+        .gallery-nav-btn.prev { left: -20px; }
+        .gallery-nav-btn.next { right: -20px; }
+        @media (max-width: 600px) {
+            .gallery-nav-btn.prev { left: 4px; }
+            .gallery-nav-btn.next { right: 4px; }
+            .gallery-modal-close { top: -14px; right: -8px; width: 36px; height: 36px; font-size: 20px; }
+        }
+        .gallery-lightbox-caption {
+            margin-top: 10px;
+            color: #e2e8f0;
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-align: center;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+        }
 
         /* FAQs */
         .faq-section { padding: 30px 0; }
@@ -1541,6 +1809,22 @@
             </div>
         </section>
 
+        <!-- Clinic & Treatment Photo Gallery (Modern Bento Grid) -->
+        <section class="gallery-section" id="gallery">
+            <div class="section-header">
+                <h2 class="section-title">Clinic & Treatment <span class="gradient-text">Gallery</span></h2>
+                <p class="section-subtitle">Real moments of healing, spine adjustments, and advanced care at Bodycare Chiropractic.</p>
+            </div>
+            <div class="bento-gallery-grid" id="bentoGalleryGrid">
+                <div class="gallery-loading"><i class="fas fa-spinner fa-spin"></i> Loading gallery photos...</div>
+            </div>
+            <div class="gallery-load-more-wrap" id="galleryLoadMoreWrap" style="display: none;">
+                <button class="btn-gallery-more" id="galleryLoadMoreBtn">
+                    <i class="fas fa-images"></i> View All Photos (<span id="galleryRemainingCount">0</span> More)
+                </button>
+            </div>
+        </section>
+
         <!-- FAQ Section -->
         <section class="faq-section">
             <div class="section-header">
@@ -1554,7 +1838,7 @@
                     <i class="fas fa-chevron-down faq-icon"></i>
                 </div>
                 <div class="faq-answer">
-                    Dr. Naeem Shaikh (BPT. ND. MD,su.) is a Senior Consultant Chiropractor with over 10 years of clinical experience. He specializes in drug-free, non-surgical chiropractic adjustments at Bodycare Chiropractic & Spine Centre, Aurangabad.
+                    Dr. Naeem Shaikh (BPT | ND | MD, su.) is a Senior Consultant Chiropractor with over 10 years of clinical experience. He specializes in drug-free, non-surgical chiropractic adjustments at Bodycare Chiropractic & Spine Centre, Aurangabad.
                 </div>
             </div>
 
@@ -1603,6 +1887,17 @@
         <div class="doctor-lightbox-card">
             <button class="doctor-modal-close" id="closeDoctorModal" aria-label="Close photo preview">&times;</button>
             <img src="dr.png" alt="Dr. Naeem Shaikh - Chiropractor in Aurangabad" class="doctor-lightbox-img">
+        </div>
+    </div>
+
+    <!-- Clinic Gallery Lightbox Modal -->
+    <div id="galleryPhotoModal" class="gallery-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="gallery-lightbox-card">
+            <button class="gallery-modal-close" id="closeGalleryModal" aria-label="Close photo preview">&times;</button>
+            <button class="gallery-nav-btn prev" id="galleryPrevBtn" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-nav-btn next" id="galleryNextBtn" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
+            <img src="" alt="Clinic & Treatment Photo" class="gallery-lightbox-img" id="galleryModalImg">
+            <div class="gallery-lightbox-caption" id="galleryModalCaption"></div>
         </div>
     </div>
 
@@ -1871,6 +2166,156 @@
             }
 
             loadVideos();
+        })();
+
+        // Clinic & Treatment Bento Gallery Logic
+        (function() {
+            if (!window.supabaseClient) return;
+
+            const grid = document.getElementById('bentoGalleryGrid');
+            const loadMoreWrap = document.getElementById('galleryLoadMoreWrap');
+            const loadMoreBtn = document.getElementById('galleryLoadMoreBtn');
+            if (!grid) return;
+
+            const modal = document.getElementById('galleryPhotoModal');
+            const modalImg = document.getElementById('galleryModalImg');
+            const modalCaption = document.getElementById('galleryModalCaption');
+            const closeBtn = document.getElementById('closeGalleryModal');
+            const prevBtn = document.getElementById('galleryPrevBtn');
+            const nextBtn = document.getElementById('galleryNextBtn');
+
+            let galleryItems = [];
+            let currentIndex = 0;
+            let isExpanded = false;
+            const INITIAL_LIMIT = 8;
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            }
+
+            async function loadGallery() {
+                try {
+                    const { data, error } = await window.supabaseClient
+                        .from('banners')
+                        .select('*')
+                        .eq('is_active', true)
+                        .order('display_order');
+
+                    if (error || !data || !data.length) {
+                        grid.innerHTML = '<div style="text-align:center;grid-column:1/-1;padding:24px;color:#64748b;">✨ Clinic gallery photos coming soon.</div>';
+                        return;
+                    }
+
+                    galleryItems = data;
+                    renderBento();
+                } catch(e) {
+                    grid.innerHTML = '<div style="text-align:center;grid-column:1/-1;padding:24px;color:#64748b;">✨ Clinic gallery photos coming soon.</div>';
+                }
+            }
+
+            function renderBento() {
+                grid.innerHTML = '';
+                const itemsToRender = isExpanded ? galleryItems : galleryItems.slice(0, INITIAL_LIMIT);
+
+                itemsToRender.forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'bento-card';
+                    
+                    // Bento layout: items 0 and 7 have featured wide format on desktop
+                    if (index === 0 || index === 7) {
+                        card.classList.add('bento-featured-wide');
+                    }
+
+                    const title = item.subtitle || item.title || 'Chiropractic Care';
+                    card.innerHTML = `
+                        <img src="${item.image_url}" alt="${title}" loading="lazy" onerror="this.src='dr.png'">
+                        <div class="bento-zoom-icon"><i class="fas fa-expand"></i></div>
+                        <div class="bento-card-overlay">
+                            ${title ? `<span class="bento-card-tag"><i class="fas fa-check-circle" style="color: #34d399;"></i> ${escapeHtml(title)}</span>` : ''}
+                        </div>
+                    `;
+
+                    card.addEventListener('click', () => openPhotoModal(index));
+                    grid.appendChild(card);
+                });
+
+                if (galleryItems.length > INITIAL_LIMIT) {
+                    loadMoreWrap.style.display = 'block';
+                    if (isExpanded) {
+                        loadMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
+                    } else {
+                        const remaining = galleryItems.length - INITIAL_LIMIT;
+                        loadMoreBtn.innerHTML = `<i class="fas fa-images"></i> View All Photos (${remaining} More)`;
+                    }
+                } else {
+                    loadMoreWrap.style.display = 'none';
+                }
+            }
+
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', () => {
+                    isExpanded = !isExpanded;
+                    renderBento();
+                    if (!isExpanded) {
+                        document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+
+            function openPhotoModal(index) {
+                currentIndex = index;
+                updateModalContent();
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closePhotoModal() {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            function updateModalContent() {
+                const item = galleryItems[currentIndex];
+                if (!item) return;
+                modalImg.src = item.image_url;
+                const caption = item.subtitle || item.title || '';
+                modalCaption.textContent = caption;
+                modalCaption.style.display = caption ? 'block' : 'none';
+            }
+
+            function prevPhoto(e) {
+                if (e) e.stopPropagation();
+                currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                updateModalContent();
+            }
+
+            function nextPhoto(e) {
+                if (e) e.stopPropagation();
+                currentIndex = (currentIndex + 1) % galleryItems.length;
+                updateModalContent();
+            }
+
+            if (closeBtn) closeBtn.addEventListener('click', closePhotoModal);
+            if (prevBtn) prevBtn.addEventListener('click', prevPhoto);
+            if (nextBtn) nextBtn.addEventListener('click', nextPhoto);
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal || e.target.classList.contains('gallery-lightbox-card')) {
+                    closePhotoModal();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (!modal.classList.contains('active')) return;
+                if (e.key === 'Escape') closePhotoModal();
+                if (e.key === 'ArrowLeft') prevPhoto();
+                if (e.key === 'ArrowRight') nextPhoto();
+            });
+
+            loadGallery();
         })();
     </script>
 </body>
