@@ -452,6 +452,15 @@
             padding: 3px;
             background: linear-gradient(135deg, #0f766e 0%, #34d399 50%, #0284c7 100%);
             box-shadow: 0 10px 25px rgba(15, 118, 110, 0.35);
+            cursor: pointer;
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+        }
+        .hero-doctor-avatar:hover {
+            transform: scale(1.06);
+            box-shadow: 0 14px 32px rgba(15, 118, 110, 0.45);
+        }
+        .hero-doctor-avatar:active {
+            transform: scale(0.98);
         }
         .hero-doctor-avatar img {
             width: 100%;
@@ -476,9 +485,38 @@
             font-size: 12px;
             border: 2px solid #0f172a;
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            z-index: 2;
         }
         body:not(.dark-mode) .hero-avatar-verified {
             border-color: #ffffff;
+        }
+        .hero-avatar-zoom-hint {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgba(15, 23, 42, 0.75);
+            color: #ffffff;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            transform: scale(0.8);
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            pointer-events: none;
+            z-index: 2;
+        }
+        body.dark-mode .hero-avatar-zoom-hint {
+            border-color: #0f172a;
+        }
+        .hero-doctor-avatar:hover .hero-avatar-zoom-hint {
+            opacity: 1;
+            transform: scale(1);
         }
         .hero-doctor-name {
             font-size: 1.55rem;
@@ -529,6 +567,22 @@
             background: linear-gradient(135deg, #34d399 0%, #38bdf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+        .typewriter-cursor {
+            display: inline-block;
+            color: #0f766e;
+            font-weight: 300;
+            margin-left: 2px;
+            animation: cursorBlink 0.9s infinite;
+            vertical-align: baseline;
+            user-select: none;
+        }
+        body.dark-mode .typewriter-cursor {
+            color: #34d399;
+        }
+        @keyframes cursorBlink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
         }
 
         .hero-subtext {
@@ -1170,6 +1224,79 @@
             color: #94a3b8;
         }
 
+        /* Doctor Profile Photo Lightbox (Pure Image Only) */
+        .doctor-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.86);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+        .doctor-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .doctor-lightbox-card {
+            position: relative;
+            width: min(82vw, 360px);
+            height: min(82vw, 360px);
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(135deg, #0f766e 0%, #34d399 50%, #0284c7 100%);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(15, 118, 110, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: scale(0.85);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .doctor-modal-overlay.active .doctor-lightbox-card {
+            transform: scale(1);
+        }
+        .doctor-lightbox-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+            background: #ffffff;
+        }
+        .doctor-modal-close {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.9);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            line-height: 1;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .doctor-modal-close:hover {
+            background: #0f766e;
+            transform: rotate(90deg) scale(1.08);
+        }
+
         /* Responsive tweaks */
         @media (max-width: 600px) {
             .hero-doctor-avatar { width: 105px; height: 105px; margin: 0 auto 8px; }
@@ -1238,7 +1365,7 @@
 
                     <!-- 2. Main Hero Heading -->
                     <h1 class="hero-title">
-                        Expert Chiropractic Care for <span class="gradient-text">Pain-Free Movement</span>
+                        Expert Chiropractic Care for <span class="gradient-text typewriter-text">Pain-Free Movement.</span><span class="typewriter-cursor">|</span>
                     </h1>
 
                     <!-- 3. Hero Description -->
@@ -1260,9 +1387,10 @@
                 <!-- Right Side: Doctor Profile Showcase Island -->
                 <div class="hero-card-right">
                     <div class="hero-doctor-block">
-                        <div class="hero-doctor-avatar">
+                        <div class="hero-doctor-avatar" id="heroDoctorAvatarBtn" role="button" tabindex="0" title="Click to view Dr. Naeem Shaikh's profile" aria-label="View Dr. Naeem Shaikh profile photo">
                             <img src="dr.png" alt="Dr. Naeem Shaikh - Chiropractor in Aurangabad">
                             <div class="hero-avatar-verified" title="Verified Specialist"><i class="fas fa-check"></i></div>
+                            <div class="hero-avatar-zoom-hint" title="Zoom"><i class="fas fa-search-plus"></i></div>
                         </div>
                         <div class="hero-doctor-name">Dr. Naeem Shaikh</div>
                         <div class="hero-doctor-qual">BPT | ND | MD, su.</div>
@@ -1288,7 +1416,7 @@
                 <div class="pastel-stat-card stat-gold">
                     <div class="card-icon" style="color: #f59e0b;"><i class="fas fa-star"></i></div>
                     <div class="card-number">4.9★</div>
-                    <div class="card-label">Patient Rating</div>
+                    <div class="card-label">Google Rating</div>
                 </div>
                 
                 <div class="pastel-stat-card stat-green">
@@ -1470,6 +1598,14 @@
         </div>
     </footer>
 
+    <!-- Doctor Photo Lightbox Modal (Pure Image Only) -->
+    <div id="doctorImageModal" class="doctor-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="doctor-lightbox-card">
+            <button class="doctor-modal-close" id="closeDoctorModal" aria-label="Close photo preview">&times;</button>
+            <img src="dr.png" alt="Dr. Naeem Shaikh - Chiropractor in Aurangabad" class="doctor-lightbox-img">
+        </div>
+    </div>
+
     <!-- Video Loader & Supabase Logic -->
     <script>
         // Dark Mode Toggle (Default Dark)
@@ -1510,6 +1646,123 @@
             }
             window.addEventListener('scroll', onScroll, { passive: true });
             onScroll();
+        })();
+
+        // Hero Typewriter Animation
+        (function() {
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const target = document.querySelector('.typewriter-text');
+            if (!target) return;
+
+            const phrases = [
+                "Pain-Free Movement.",
+                "Back & Spine Relief.",
+                "Sciatica & Slip Disc.",
+                "Neck & Cervical Pain."
+            ];
+
+            let phraseIndex = 0;
+            let charIndex = phrases[0].length;
+            let isDeleting = true;
+
+            const typeSpeed = 85;
+            const deleteSpeed = 40;
+            const pauseEnd = 2200;
+            const pauseStart = 400;
+
+            function tick() {
+                const currentPhrase = phrases[phraseIndex];
+
+                if (isDeleting) {
+                    charIndex--;
+                    target.textContent = currentPhrase.substring(0, charIndex);
+
+                    if (charIndex <= 0) {
+                        isDeleting = false;
+                        phraseIndex = (phraseIndex + 1) % phrases.length;
+                        setTimeout(tick, pauseStart);
+                        return;
+                    }
+                    setTimeout(tick, deleteSpeed);
+                } else {
+                    charIndex++;
+                    target.textContent = currentPhrase.substring(0, charIndex);
+
+                    if (charIndex === currentPhrase.length) {
+                        isDeleting = true;
+                        setTimeout(tick, pauseEnd);
+                        return;
+                    }
+                    setTimeout(tick, typeSpeed);
+                }
+            }
+
+            setTimeout(tick, pauseEnd);
+        })();
+
+        // Doctor Profile Image Modal Logic
+        (function() {
+            const avatarBtn = document.getElementById('heroDoctorAvatarBtn');
+            const modal = document.getElementById('doctorImageModal');
+            const closeBtn = document.getElementById('closeDoctorModal');
+            if (!avatarBtn || !modal) return;
+
+            function openModal() {
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+
+            avatarBtn.addEventListener('click', openModal);
+            avatarBtn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openModal();
+                }
+            });
+
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        })();
+
+        // WhatsApp Mobile App Chooser (Triggers Android "Open with: WhatsApp / WA Business" app chooser)
+        (function() {
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (!isMobile) return;
+
+            document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+                const originalHref = link.getAttribute('href');
+                let phone = '918888838415';
+                let text = '';
+                try {
+                    const url = new URL(originalHref);
+                    phone = url.pathname.replace(/^\//, '') || '918888838415';
+                    text = url.searchParams.get('text') || '';
+                } catch(e) {}
+
+                const whatsappScheme = `whatsapp://send?phone=${phone}${text ? `&text=${encodeURIComponent(text)}` : ''}`;
+                link.setAttribute('href', whatsappScheme);
+                link.removeAttribute('target');
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = whatsappScheme;
+                });
+            });
         })();
 
         // FAQ Accordion
