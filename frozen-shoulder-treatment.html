@@ -355,7 +355,7 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#0f766e">
 </head>
-<body class="dark-mode">
+<body>
 
     <!-- Navbar -->
     <header class="navbar">
@@ -506,10 +506,12 @@
     </footer>
 
     <script>
-        // Check local storage for dark mode
+        // Check local storage for dark mode (Default Light)
         (function() {
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            } else {
                 document.body.classList.remove('dark-mode');
             }
         })();

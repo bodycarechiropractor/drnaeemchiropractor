@@ -1530,6 +1530,202 @@
             text-shadow: 0 2px 6px rgba(0,0,0,0.7);
         }
 
+        /* Clinic Location & Map Section */
+        .location-section {
+            padding: 30px 0;
+        }
+        .location-container {
+            max-width: 1040px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            align-items: stretch;
+        }
+        @media (min-width: 768px) {
+            .location-container {
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+                gap: 24px;
+            }
+        }
+        .location-map-wrap {
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            background: #f1f5f9;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .location-map-wrap:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(15, 118, 110, 0.15);
+        }
+        body.dark-mode .location-map-wrap {
+            border-color: #334155;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            background: #1e293b;
+        }
+        .location-map-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+        .location-details-card {
+            background: white;
+            border-radius: 24px;
+            padding: 26px 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 16px;
+        }
+        body.dark-mode .location-details-card {
+            background: #1e293b;
+            border-color: #334155;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        }
+        .loc-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #ccfbf1;
+            color: #0f766e;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 20px;
+            width: fit-content;
+        }
+        body.dark-mode .loc-badge {
+            background: rgba(15, 118, 110, 0.25);
+            color: #2dd4bf;
+        }
+        .loc-clinic-name {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 2px;
+        }
+        body.dark-mode .loc-clinic-name {
+            color: #f8fafc;
+        }
+        .loc-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .loc-icon-bubble {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #f0fdfa;
+            color: #0f766e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            border: 1px solid #ccfbf1;
+        }
+        body.dark-mode .loc-icon-bubble {
+            background: #0f2926;
+            color: #34d399;
+            border-color: #134e4a;
+        }
+        .loc-text strong {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        body.dark-mode .loc-text strong {
+            color: #94a3b8;
+        }
+        .loc-text p {
+            font-size: 0.93rem;
+            color: #1e293b;
+            line-height: 1.45;
+            margin: 0;
+        }
+        body.dark-mode .loc-text p {
+            color: #e2e8f0;
+        }
+        .loc-closed-tag {
+            background: #fee2e2;
+            color: #991b1b;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 6px;
+            display: inline-block;
+        }
+        body.dark-mode .loc-closed-tag {
+            background: #450a0a;
+            color: #fca5a5;
+        }
+        .loc-phone-link {
+            color: #0f766e;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .loc-phone-link:hover {
+            text-decoration: underline;
+        }
+        body.dark-mode .loc-phone-link {
+            color: #34d399;
+        }
+        .loc-actions-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+        .btn-get-directions {
+            background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+            color: white;
+            padding: 11px 22px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(15, 118, 110, 0.25);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-get-directions:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(15, 118, 110, 0.35);
+        }
+        .btn-loc-whatsapp {
+            background: #25D366;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-loc-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+        }
+
         /* FAQs */
         .faq-section { padding: 30px 0; }
         .faq-item {
@@ -1686,7 +1882,7 @@
         }
     </style>
 </head>
-<body class="dark-mode">
+<body>
 
     <!-- Navbar -->
     <header class="navbar">
@@ -1919,6 +2115,69 @@
             </div>
         </section>
 
+        <!-- Clinic Location & Map Section (1:1 Map + Side Details) -->
+        <section class="location-section" id="location">
+            <div class="section-header">
+                <h2 class="section-title">Clinic <span class="gradient-text">Location & Map</span></h2>
+                <p class="section-subtitle">Easy to find and centrally located in Chhatrapati Sambhajinagar.</p>
+            </div>
+
+            <div class="location-container">
+                <!-- 1:1 Square Map Box -->
+                <div class="location-map-wrap">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15008.288731364819!2d75.3669799!3d19.8791737!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdba3cd0a20a771%3A0x3fb974f118ffe668!2sBodycare%20chiropractic%20%26%20spine%20centre!5e0!3m2!1sen!2sin!4v1776318443200!5m2!1sen!2sin" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade" 
+                        title="Bodycare Chiropractic Location Map">
+                    </iframe>
+                </div>
+
+                <!-- Side Address Details Card -->
+                <div class="location-details-card">
+                    <div class="loc-badge">
+                        <i class="fas fa-map-marked-alt"></i> Bodycare Chiropractic & Spine Centre
+                    </div>
+
+                    <h3 class="loc-clinic-name">Dr. Naeem Shaikh's Clinic</h3>
+
+                    <div class="loc-info-item">
+                        <div class="loc-icon-bubble"><i class="fas fa-map-pin"></i></div>
+                        <div class="loc-text">
+                            <strong>Clinic Address:</strong>
+                            <p>First Floor, Mediseva Medical, Prozone Mall Road, Town Centre N1 Cidco, Chhatrapati Sambhajinagar (Aurangabad) 431003.</p>
+                        </div>
+                    </div>
+
+                    <div class="loc-info-item">
+                        <div class="loc-icon-bubble"><i class="fas fa-clock"></i></div>
+                        <div class="loc-text">
+                            <strong>Consultation Timings:</strong>
+                            <p>Everyday 11:00 AM – 7:00 PM <span class="loc-closed-tag">Wednesday Closed</span></p>
+                        </div>
+                    </div>
+
+                    <div class="loc-info-item">
+                        <div class="loc-icon-bubble"><i class="fas fa-phone-alt"></i></div>
+                        <div class="loc-text">
+                            <strong>Contact / Call Clinic:</strong>
+                            <p><a href="tel:+918888838415" class="loc-phone-link">+91 88888 38415</a></p>
+                        </div>
+                    </div>
+
+                    <div class="loc-actions-row">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Bodycare+chiropractic+%26+spine+centre+Aurangabad" target="_blank" rel="noopener noreferrer" class="btn-get-directions">
+                            <i class="fas fa-directions"></i> Get Directions
+                        </a>
+                        <a href="https://wa.me/918888838415" target="_blank" rel="noopener noreferrer" class="btn-loc-whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- FAQ Section -->
         <section class="faq-section">
             <div class="section-header">
@@ -1997,16 +2256,16 @@
 
     <!-- Video Loader & Supabase Logic -->
     <script>
-        // Dark Mode Toggle (Default Dark)
+        // Theme Toggle (Default Light)
         (function() {
             const toggle = document.getElementById('darkModeToggle');
             const saved = localStorage.getItem('theme');
             
-            // Default is dark mode unless user explicitly selected 'light'
-            if (saved === 'light') {
-                document.body.classList.remove('dark-mode');
-            } else {
+            // Default is light mode unless user explicitly selected 'dark'
+            if (saved === 'dark') {
                 document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
             }
             
             if (toggle) {
