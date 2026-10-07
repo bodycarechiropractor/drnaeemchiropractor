@@ -1047,25 +1047,63 @@
             }
         }
 
-        /* Clinic Timing Card (Centered Bodycare Style) */
+        /* Clinic Timing Card (Animated Bodycare Style) */
         .clinic-timing {
+            position: relative;
+            overflow: hidden;
             background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 36px;
-            padding: 20px 24px;
+            padding: 22px 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            gap: 10px;
-            box-shadow: 0 8px 24px rgba(15, 118, 110, 0.25);
+            gap: 12px;
+            box-shadow: 0 10px 28px rgba(15, 118, 110, 0.28);
             color: white;
             margin: 28px auto 22px;
             max-width: 580px;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+        .clinic-timing:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 34px rgba(15, 118, 110, 0.38);
         }
         body.dark-mode .clinic-timing {
             background: linear-gradient(135deg, #0f766e 0%, #094a45 100%);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+            border-color: rgba(45, 212, 191, 0.25);
+        }
+        .clinic-timing-shimmer {
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.16) 50%,
+                transparent 100%
+            );
+            transform: skewX(-25deg);
+            animation: shimmer-sweep 4.5s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes shimmer-sweep {
+            0%, 45% { left: -150%; }
+            75%, 100% { left: 150%; }
+        }
+        .timing-header {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
         .timing-icon {
             display: flex;
@@ -1075,23 +1113,82 @@
             font-size: 1.25rem;
             font-weight: 700;
         }
-        .timing-icon i {
+        .timing-icon i.clock-pulse-icon {
             font-size: 1.2rem;
             background: white;
             color: #0f766e;
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+            animation: clock-ticking 4.5s ease-in-out infinite;
+        }
+        @keyframes clock-ticking {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            15% { transform: scale(1.1) rotate(14deg); }
+            30% { transform: scale(1) rotate(0deg); }
+            45% { transform: scale(1.1) rotate(-14deg); }
+            60% { transform: scale(1) rotate(0deg); }
+        }
+        .clinic-live-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 5px 15px;
+            border-radius: 30px;
+            backdrop-filter: blur(8px);
+            letter-spacing: 0.2px;
+            transition: all 0.3s ease;
+        }
+        .clinic-live-status.open {
+            background: rgba(16, 185, 129, 0.25);
+            color: #a7f3d0;
+            border: 1px solid rgba(52, 211, 153, 0.5);
+        }
+        .clinic-live-status.closed {
+            background: rgba(239, 68, 68, 0.25);
+            color: #fecaca;
+            border: 1px solid rgba(248, 113, 113, 0.5);
+        }
+        .clinic-live-status .status-pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .clinic-live-status.open .status-pulse-dot {
+            background: #10b981;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.8);
+            animation: live-open-pulse 1.8s infinite;
+        }
+        .clinic-live-status.closed .status-pulse-dot {
+            background: #ef4444;
+            box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8);
+            animation: live-closed-pulse 2s infinite;
+        }
+        @keyframes live-open-pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.8); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        @keyframes live-closed-pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
         .timing-days {
+            position: relative;
+            z-index: 2;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 9px;
         }
         .day-range {
             font-weight: 700;
@@ -1103,14 +1200,22 @@
             opacity: 0.95;
         }
         .closed-badge {
-            background: #991b1b;
-            padding: 5px 16px;
+            background: rgba(153, 27, 27, 0.95);
+            border: 1px solid rgba(248, 113, 113, 0.35);
+            padding: 6px 18px;
             border-radius: 30px;
-            font-size: 0.82rem;
+            font-size: 0.83rem;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            letter-spacing: 0.2px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            animation: subtle-warn-glow 3.5s ease-in-out infinite;
+        }
+        @keyframes subtle-warn-glow {
+            0%, 100% { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); }
+            50% { box-shadow: 0 0 14px rgba(239, 68, 68, 0.55); }
         }
 
         /* Social / Contact Grid (Bodycare Pill 2-Col Style) */
@@ -1168,85 +1273,92 @@
             background: #273549;
             border-color: #475569;
         }
-        /* Clinic & Treatment Bento Gallery */
+        /* Clinic & Treatment Living Mosaic Gallery */
         .gallery-section {
             padding: 30px 0;
         }
-        .bento-gallery-grid {
+        .mosaic-gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             max-width: 1040px;
             margin: 0 auto;
         }
-        @media (min-width: 680px) {
-            .bento-gallery-grid {
+        @media (min-width: 768px) {
+            .mosaic-gallery-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 16px;
             }
         }
-        @media (min-width: 990px) {
-            .bento-gallery-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 18px;
-            }
-        }
-        .bento-card {
+        .mosaic-card {
             position: relative;
-            border-radius: 20px;
+            border-radius: 18px;
             overflow: hidden;
-            background: #f1f5f9;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+            background: #0f172a;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
             border: 1px solid #e2e8f0;
             cursor: pointer;
-            aspect-ratio: 1 / 1.05;
+            aspect-ratio: 4 / 3;
             transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease, border-color 0.2s ease;
         }
-        body.dark-mode .bento-card {
-            background: #1e293b;
+        body.dark-mode .mosaic-card {
             border-color: #334155;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
         }
-        .bento-card:hover {
+        .mosaic-card:hover {
             transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 14px 30px rgba(15, 118, 110, 0.18);
+            box-shadow: 0 14px 30px rgba(15, 118, 110, 0.2);
             border-color: #0f766e;
         }
-        body.dark-mode .bento-card:hover {
+        body.dark-mode .mosaic-card:hover {
             border-color: #34d399;
-            box-shadow: 0 14px 30px rgba(52, 211, 153, 0.18);
+            box-shadow: 0 14px 30px rgba(52, 211, 153, 0.2);
         }
-        .bento-card img {
+        .mosaic-img-holder {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .mosaic-img {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease;
+            opacity: 0;
+            transform: scale(0.96);
+            transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+            will-change: opacity, transform;
+            pointer-events: none;
         }
-        .bento-card:hover img {
+        .mosaic-img.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 2;
+        }
+        .mosaic-img.fading-out {
+            opacity: 0;
+            transform: scale(1.05);
+            z-index: 1;
+        }
+        .mosaic-card:hover .mosaic-img.active {
             transform: scale(1.06);
         }
-        .bento-card-overlay {
+        .mosaic-card-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(15, 23, 42, 0.78) 100%);
+            background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(15, 23, 42, 0.82) 100%);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             padding: 12px;
-            opacity: 0;
+            z-index: 3;
+            pointer-events: none;
             transition: opacity 0.22s ease;
         }
-        .bento-card:hover .bento-card-overlay {
-            opacity: 1;
-        }
-        @media (max-width: 600px) {
-            .bento-card-overlay {
-                opacity: 1;
-                padding: 8px;
-            }
-        }
-        .bento-zoom-icon {
+        .mosaic-zoom-icon {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -1263,12 +1375,14 @@
             opacity: 0;
             transform: scale(0.8);
             transition: opacity 0.22s, transform 0.22s;
+            z-index: 4;
+            pointer-events: none;
         }
-        .bento-card:hover .bento-zoom-icon {
+        .mosaic-card:hover .mosaic-zoom-icon {
             opacity: 1;
             transform: scale(1);
         }
-        .bento-card-tag {
+        .mosaic-card-tag {
             color: white;
             font-size: 0.8rem;
             font-weight: 700;
@@ -1279,53 +1393,111 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            transition: opacity 0.3s ease;
         }
-        @media (min-width: 900px) {
-            .bento-card.bento-featured-wide {
-                grid-column: span 2;
-                aspect-ratio: 2 / 1.05;
-            }
-        }
-        .gallery-load-more-wrap {
-            text-align: center;
-            margin-top: 24px;
-        }
-        .btn-gallery-more {
-            background: white;
-            color: #0f766e;
-            border: 2px solid #0f766e;
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-size: 0.92rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.1);
-            transition: all 0.2s ease;
-        }
-        .btn-gallery-more:hover {
-            background: #0f766e;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(15, 118, 110, 0.25);
-        }
-        body.dark-mode .btn-gallery-more {
-            background: #1e293b;
-            color: #34d399;
-            border-color: #34d399;
-        }
-        body.dark-mode .btn-gallery-more:hover {
-            background: #34d399;
-            color: #0f172a;
-        }
+
         .gallery-loading {
             grid-column: 1 / -1;
             text-align: center;
             padding: 24px;
             color: #64748b;
             font-weight: 600;
+        }
+
+        /* Local Patient Testimonials (Dynamic Preview) */
+        .local-reviews-section {
+            margin: 30px auto;
+            max-width: 1040px;
+        }
+        .local-reviews-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+        @media (min-width: 768px) {
+            .local-reviews-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .local-review-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+        body.dark-mode .local-review-card {
+            background: #1e293b;
+            border-color: #334155;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        .local-review-card:hover {
+            transform: translateY(-2px);
+            border-color: #0f766e;
+        }
+        .local-review-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .local-review-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+            color: white;
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .local-review-name {
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+        body.dark-mode .local-review-name { color: #f8fafc; }
+        .local-review-sub {
+            font-size: 0.78rem;
+            color: #64748b;
+        }
+        .local-review-stars {
+            color: #f59e0b;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .local-review-time {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-left: 8px;
+        }
+        .local-review-text {
+            font-size: 0.92rem;
+            line-height: 1.55;
+            color: #334155;
+        }
+        body.dark-mode .local-review-text { color: #cbd5e1; }
+        .local-review-treatment {
+            display: inline-block;
+            margin-top: 10px;
+            background: #ccfbf1;
+            color: #0f766e;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+        body.dark-mode .local-review-treatment {
+            background: rgba(15, 118, 110, 0.25);
+            color: #2dd4bf;
         }
 
         /* Clinic Gallery Lightbox Modal */
@@ -1715,9 +1887,16 @@
         <div class="clinic-info-row">
             <!-- Clinic Timing Card -->
             <div class="clinic-timing">
-                <div class="timing-icon">
-                    <i class="fas fa-clock"></i>
-                    <span>Clinic Hours</span>
+                <div class="clinic-timing-shimmer"></div>
+                <div class="timing-header">
+                    <div class="timing-icon">
+                        <i class="fas fa-clock clock-pulse-icon"></i>
+                        <span>Clinic Hours</span>
+                    </div>
+                    <div class="clinic-live-status" id="clinicLiveStatus">
+                        <span class="status-pulse-dot"></span>
+                        <span class="status-text">Checking hours...</span>
+                    </div>
                 </div>
                 <div class="timing-days">
                     <div class="day-range">Everyday <span>11:00 AM – 7:00 PM</span></div>
@@ -1796,6 +1975,15 @@
             </div>
         </section>
 
+        <!-- Verified Patient Reviews (Dynamic / Local Feedback) -->
+        <section class="local-reviews-section" id="localReviewsSection" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">Verified Patient <span class="gradient-text">Reviews</span></h2>
+                <p class="section-subtitle">Real experiences and verified recovery feedback from our patients.</p>
+            </div>
+            <div class="local-reviews-grid" id="localReviewsGrid"></div>
+        </section>
+
         <!-- Video Reviews Section (Watch Healing) -->
         <section class="video-section">
             <div class="section-header">
@@ -1809,19 +1997,14 @@
             </div>
         </section>
 
-        <!-- Clinic & Treatment Photo Gallery (Modern Bento Grid) -->
+        <!-- Clinic & Treatment Photo Gallery (Dynamic 6-Image Mosaic) -->
         <section class="gallery-section" id="gallery">
             <div class="section-header">
                 <h2 class="section-title">Clinic & Treatment <span class="gradient-text">Gallery</span></h2>
                 <p class="section-subtitle">Real moments of healing, spine adjustments, and advanced care at Bodycare Chiropractic.</p>
             </div>
-            <div class="bento-gallery-grid" id="bentoGalleryGrid">
+            <div class="mosaic-gallery-grid" id="mosaicGalleryGrid">
                 <div class="gallery-loading"><i class="fas fa-spinner fa-spin"></i> Loading gallery photos...</div>
-            </div>
-            <div class="gallery-load-more-wrap" id="galleryLoadMoreWrap" style="display: none;">
-                <button class="btn-gallery-more" id="galleryLoadMoreBtn">
-                    <i class="fas fa-images"></i> View All Photos (<span id="galleryRemainingCount">0</span> More)
-                </button>
             </div>
         </section>
 
@@ -2168,13 +2351,11 @@
             loadVideos();
         })();
 
-        // Clinic & Treatment Bento Gallery Logic
+        // Clinic & Treatment Dynamic 6-Image Mosaic Logic
         (function() {
             if (!window.supabaseClient) return;
 
-            const grid = document.getElementById('bentoGalleryGrid');
-            const loadMoreWrap = document.getElementById('galleryLoadMoreWrap');
-            const loadMoreBtn = document.getElementById('galleryLoadMoreBtn');
+            const grid = document.getElementById('mosaicGalleryGrid');
             if (!grid) return;
 
             const modal = document.getElementById('galleryPhotoModal');
@@ -2186,8 +2367,13 @@
 
             let galleryItems = [];
             let currentIndex = 0;
-            let isExpanded = false;
-            const INITIAL_LIMIT = 8;
+            const TOTAL_SLOTS = 6;
+            let slotState = []; 
+            let activePhotoIndices = new Set();
+            let poolCursor = 0;
+            let rotationTimer = null;
+            let isUserHovering = false;
+            let pairCycleStep = 0;
 
             function escapeHtml(str) {
                 if (!str) return '';
@@ -2208,61 +2394,166 @@
                     }
 
                     galleryItems = data;
-                    renderBento();
+                    setupMosaic();
                 } catch(e) {
                     grid.innerHTML = '<div style="text-align:center;grid-column:1/-1;padding:24px;color:#64748b;">✨ Clinic gallery photos coming soon.</div>';
                 }
             }
 
-            function renderBento() {
+            function getCleanTitle(item) {
+                if (!item) return '';
+                return (item.subtitle || item.title || '').trim();
+            }
+
+            function setupMosaic() {
                 grid.innerHTML = '';
-                const itemsToRender = isExpanded ? galleryItems : galleryItems.slice(0, INITIAL_LIMIT);
+                slotState = [];
+                activePhotoIndices.clear();
 
-                itemsToRender.forEach((item, index) => {
+                const slotCount = Math.min(TOTAL_SLOTS, galleryItems.length);
+                for (let i = 0; i < slotCount; i++) {
+                    const photoIndex = i;
+                    activePhotoIndices.add(photoIndex);
+
                     const card = document.createElement('div');
-                    card.className = 'bento-card';
-                    
-                    // Bento layout: items 0 and 7 have featured wide format on desktop
-                    if (index === 0 || index === 7) {
-                        card.classList.add('bento-featured-wide');
-                    }
+                    card.className = 'mosaic-card';
+                    card.dataset.slot = i;
 
-                    const title = item.subtitle || item.title || 'Chiropractic Care';
+                    const item = galleryItems[photoIndex];
+                    const title = getCleanTitle(item);
+                    const hasTitle = Boolean(title);
+
                     card.innerHTML = `
-                        <img src="${item.image_url}" alt="${title}" loading="lazy" onerror="this.src='dr.png'">
-                        <div class="bento-zoom-icon"><i class="fas fa-expand"></i></div>
-                        <div class="bento-card-overlay">
-                            ${title ? `<span class="bento-card-tag"><i class="fas fa-check-circle" style="color: #34d399;"></i> ${escapeHtml(title)}</span>` : ''}
+                        <div class="mosaic-img-holder">
+                            <img class="mosaic-img active" src="${item.image_url}" alt="${escapeHtml(title || 'Bodycare Clinic')}" loading="eager" onerror="this.src='dr.png'">
+                            <img class="mosaic-img" src="" alt="${escapeHtml(title || 'Bodycare Clinic')}" loading="eager" onerror="this.src='dr.png'">
+                        </div>
+                        <div class="mosaic-zoom-icon"><i class="fas fa-expand"></i></div>
+                        <div class="mosaic-card-overlay" style="${hasTitle ? '' : 'display: none;'}">
+                            <span class="mosaic-card-tag">${hasTitle ? `<i class="fas fa-check-circle" style="color: #34d399;"></i> ${escapeHtml(title)}` : ''}</span>
                         </div>
                     `;
 
-                    card.addEventListener('click', () => openPhotoModal(index));
+                    const imgs = card.querySelectorAll('.mosaic-img');
+                    const overlay = card.querySelector('.mosaic-card-overlay');
+                    const tag = card.querySelector('.mosaic-card-tag');
+
+                    const slotObj = {
+                        slotIndex: i,
+                        currentPhotoIndex: photoIndex,
+                        activeLayer: 'a',
+                        cardEl: card,
+                        imgA: imgs[0],
+                        imgB: imgs[1],
+                        overlayEl: overlay,
+                        tagEl: tag
+                    };
+
+                    slotState.push(slotObj);
+
+                    card.addEventListener('click', () => {
+                        openPhotoModal(slotObj.currentPhotoIndex);
+                    });
+
                     grid.appendChild(card);
+                }
+
+                poolCursor = slotCount % galleryItems.length;
+
+                // Setup hover / touch pause
+                grid.addEventListener('mouseenter', () => { isUserHovering = true; });
+                grid.addEventListener('mouseleave', () => { isUserHovering = false; });
+                grid.addEventListener('touchstart', () => { isUserHovering = true; }, { passive: true });
+                grid.addEventListener('touchend', () => { 
+                    setTimeout(() => { isUserHovering = false; }, 3000); 
                 });
 
-                if (galleryItems.length > INITIAL_LIMIT) {
-                    loadMoreWrap.style.display = 'block';
-                    if (isExpanded) {
-                        loadMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
-                    } else {
-                        const remaining = galleryItems.length - INITIAL_LIMIT;
-                        loadMoreBtn.innerHTML = `<i class="fas fa-images"></i> View All Photos (${remaining} More)`;
-                    }
-                } else {
-                    loadMoreWrap.style.display = 'none';
+                if (galleryItems.length > slotCount) {
+                    startAutoRotation();
                 }
             }
 
-            if (loadMoreBtn) {
-                loadMoreBtn.addEventListener('click', () => {
-                    isExpanded = !isExpanded;
-                    renderBento();
-                    if (!isExpanded) {
-                        document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+            function getNextPoolPhotoIndex() {
+                if (galleryItems.length <= 1) return 0;
+                let attempts = 0;
+                while (attempts < galleryItems.length) {
+                    const candidate = poolCursor;
+                    poolCursor = (poolCursor + 1) % galleryItems.length;
+                    if (!activePhotoIndices.has(candidate)) {
+                        return candidate;
+                    }
+                    attempts++;
+                }
+                return poolCursor;
+            }
+
+            function swapSlotPhoto(slotObj, newPhotoIndex) {
+                const item = galleryItems[newPhotoIndex];
+                if (!item) return;
+
+                activePhotoIndices.delete(slotObj.currentPhotoIndex);
+                activePhotoIndices.add(newPhotoIndex);
+                slotObj.currentPhotoIndex = newPhotoIndex;
+
+                const currentActiveImg = slotObj.activeLayer === 'a' ? slotObj.imgA : slotObj.imgB;
+                const nextActiveImg = slotObj.activeLayer === 'a' ? slotObj.imgB : slotObj.imgA;
+                const title = getCleanTitle(item);
+                const hasTitle = Boolean(title);
+
+                nextActiveImg.src = item.image_url;
+                nextActiveImg.alt = title || 'Bodycare Clinic';
+
+                nextActiveImg.className = 'mosaic-img active';
+                currentActiveImg.className = 'mosaic-img fading-out';
+
+                if (slotObj.tagEl && slotObj.overlayEl) {
+                    slotObj.tagEl.style.opacity = '0';
+                    setTimeout(() => {
+                        if (hasTitle) {
+                            slotObj.overlayEl.style.display = 'flex';
+                            slotObj.tagEl.innerHTML = `<i class="fas fa-check-circle" style="color: #34d399;"></i> ${escapeHtml(title)}`;
+                            slotObj.tagEl.style.opacity = '1';
+                        } else {
+                            slotObj.overlayEl.style.display = 'none';
+                            slotObj.tagEl.innerHTML = '';
+                        }
+                    }, 350);
+                }
+
+                setTimeout(() => {
+                    currentActiveImg.className = 'mosaic-img';
+                    slotObj.activeLayer = slotObj.activeLayer === 'a' ? 'b' : 'a';
+                }, 750);
+            }
+
+            function rotatePair() {
+                if (isUserHovering || modal.classList.contains('active')) return;
+                if (slotState.length < 2) return;
+
+                // Cycle pairs: [0, 3], [1, 4], [2, 5]
+                const pairPairs = [
+                    [0, 3],
+                    [1, 4],
+                    [2, 5]
+                ];
+
+                const currentPair = pairPairs[pairCycleStep % pairPairs.length];
+                pairCycleStep++;
+
+                currentPair.forEach((slotIdx) => {
+                    if (slotState[slotIdx]) {
+                        const newPhotoIndex = getNextPoolPhotoIndex();
+                        swapSlotPhoto(slotState[slotIdx], newPhotoIndex);
                     }
                 });
             }
 
+            function startAutoRotation() {
+                if (rotationTimer) clearInterval(rotationTimer);
+                rotationTimer = setInterval(rotatePair, 1500);
+            }
+
+            // Lightbox Modal Logic
             function openPhotoModal(index) {
                 currentIndex = index;
                 updateModalContent();
@@ -2281,7 +2572,7 @@
                 const item = galleryItems[currentIndex];
                 if (!item) return;
                 modalImg.src = item.image_url;
-                const caption = item.subtitle || item.title || '';
+                const caption = getCleanTitle(item);
                 modalCaption.textContent = caption;
                 modalCaption.style.display = caption ? 'block' : 'none';
             }
@@ -2316,6 +2607,96 @@
             });
 
             loadGallery();
+        })();
+
+        // Clinic Real-Time Live Status Logic (IST)
+        (function() {
+            function updateClinicStatus() {
+                const el = document.getElementById('clinicLiveStatus');
+                if (!el) return;
+
+                // Calculate current time in Indian Standard Time (UTC+5:30)
+                const now = new Date();
+                const istOffsetMs = 5.5 * 60 * 60 * 1000;
+                const utcMs = now.getTime() + (now.getTimezoneOffset() * 60000);
+                const istDate = new Date(utcMs + istOffsetMs);
+
+                const day = istDate.getDay(); // 0 = Sun, 1 = Mon, 2 = Tue, 3 = Wed, 4 = Thu, 5 = Fri, 6 = Sat
+                const hour = istDate.getHours();
+                const minute = istDate.getMinutes();
+                const timeInMinutes = hour * 60 + minute;
+
+                const openMinutes = 11 * 60; // 11:00 AM = 660 mins
+                const closeMinutes = 19 * 60; // 7:00 PM = 1140 mins
+
+                if (day === 3) {
+                    // Wednesday - Fully Closed
+                    el.className = 'clinic-live-status closed';
+                    el.innerHTML = '<span class="status-pulse-dot"></span><span class="status-text">Closed Today (Wed) &bull; Opens Thu 11:00 AM</span>';
+                } else if (timeInMinutes >= openMinutes && timeInMinutes < closeMinutes) {
+                    // Currently Open
+                    el.className = 'clinic-live-status open';
+                    el.innerHTML = '<span class="status-pulse-dot"></span><span class="status-text">Open Now &bull; Closes at 7:00 PM</span>';
+                } else if (timeInMinutes < openMinutes) {
+                    // Morning before 11:00 AM
+                    el.className = 'clinic-live-status closed';
+                    el.innerHTML = '<span class="status-pulse-dot"></span><span class="status-text">Closed Now &bull; Opens Today at 11:00 AM</span>';
+                } else {
+                    // Evening after 7:00 PM
+                    const nextOpens = (day === 2) ? 'Thursday' : 'Tomorrow';
+                    el.className = 'clinic-live-status closed';
+                    el.innerHTML = `<span class="status-pulse-dot"></span><span class="status-text">Closed Now &bull; Opens ${nextOpens} at 11:00 AM</span>`;
+                }
+            }
+
+            updateClinicStatus();
+            setInterval(updateClinicStatus, 30000);
+        })();
+
+        // Display locally submitted patient reviews if present
+        (function() {
+            const STORAGE_KEY = 'dr_naeem_local_patient_reviews';
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (!saved) return;
+                const reviews = JSON.parse(saved);
+                if (!reviews || !reviews.length) return;
+
+                const section = document.getElementById('localReviewsSection');
+                const grid = document.getElementById('localReviewsGrid');
+                if (!section || !grid) return;
+
+                function escapeHtml(str) {
+                    if (!str) return '';
+                    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                }
+
+                grid.innerHTML = '';
+                reviews.forEach(item => {
+                    const initial = item.name ? item.name.charAt(0).toUpperCase() : 'P';
+                    let starsHtml = '';
+                    for (let i = 1; i <= 5; i++) {
+                        starsHtml += `<i class="fas fa-star" style="color: ${i <= item.rating ? '#f59e0b' : '#cbd5e1'};"></i>`;
+                    }
+                    const card = document.createElement('div');
+                    card.className = 'local-review-card';
+                    card.innerHTML = `
+                        <div class="local-review-header">
+                            <div class="local-review-avatar">${initial}</div>
+                            <div>
+                                <div class="local-review-name">${escapeHtml(item.name)} <i class="fas fa-check-circle" style="color:#0284c7;" title="Verified Patient"></i></div>
+                                <div class="local-review-sub">${escapeHtml(item.city || 'Aurangabad')} &bull; Verified Google Review</div>
+                            </div>
+                        </div>
+                        <div class="local-review-stars">${starsHtml} <span class="local-review-time">${escapeHtml(item.time || 'Recently')}</span></div>
+                        <div class="local-review-text">${escapeHtml(item.message)}</div>
+                        ${item.treatment ? `<div class="local-review-treatment"><i class="fas fa-bone"></i> ${escapeHtml(item.treatment)}</div>` : ''}
+                    `;
+                    grid.appendChild(card);
+                });
+
+                section.style.display = 'block';
+            } catch(e) {}
         })();
     </script>
 </body>
