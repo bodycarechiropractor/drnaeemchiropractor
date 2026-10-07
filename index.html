@@ -679,15 +679,31 @@
             text-align: center;
             box-shadow: 0 8px 20px rgba(0,0,0,0.04);
             border: 1px solid rgba(255,255,255,0.7);
-            transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            transform: translateY(32px) scale(0.92);
+            transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.25s ease;
+            will-change: opacity, transform;
         }
+        .pastel-stat-card.animate-in {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .pastel-stat-card:nth-child(1) { transition-delay: 0.05s; }
+        .pastel-stat-card:nth-child(2) { transition-delay: 0.12s; }
+        .pastel-stat-card:nth-child(3) { transition-delay: 0.19s; }
+        .pastel-stat-card:nth-child(4) { transition-delay: 0.26s; }
+        .pastel-stat-card:nth-child(5) { transition-delay: 0.33s; }
+        .pastel-stat-card:nth-child(6) { transition-delay: 0.40s; }
         .pastel-stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+            transform: translateY(-4px) scale(1.02) !important;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.1);
+            transition-delay: 0s !important;
         }
         .pastel-stat-card .card-icon {
             font-size: 1.35rem;
@@ -1404,102 +1420,6 @@
             font-weight: 600;
         }
 
-        /* Local Patient Testimonials (Dynamic Preview) */
-        .local-reviews-section {
-            margin: 30px auto;
-            max-width: 1040px;
-        }
-        .local-reviews-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-            margin-top: 16px;
-        }
-        @media (min-width: 768px) {
-            .local-reviews-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        .local-review-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s;
-        }
-        body.dark-mode .local-review-card {
-            background: #1e293b;
-            border-color: #334155;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-        }
-        .local-review-card:hover {
-            transform: translateY(-2px);
-            border-color: #0f766e;
-        }
-        .local-review-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-        .local-review-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
-            color: white;
-            font-weight: 800;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .local-review-name {
-            font-size: 0.98rem;
-            font-weight: 800;
-            color: #0f172a;
-        }
-        body.dark-mode .local-review-name { color: #f8fafc; }
-        .local-review-sub {
-            font-size: 0.78rem;
-            color: #64748b;
-        }
-        .local-review-stars {
-            color: #f59e0b;
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-        .local-review-time {
-            font-size: 0.75rem;
-            color: #94a3b8;
-            margin-left: 8px;
-        }
-        .local-review-text {
-            font-size: 0.92rem;
-            line-height: 1.55;
-            color: #334155;
-        }
-        body.dark-mode .local-review-text { color: #cbd5e1; }
-        .local-review-treatment {
-            display: inline-block;
-            margin-top: 10px;
-            background: #ccfbf1;
-            color: #0f766e;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 12px;
-        }
-        body.dark-mode .local-review-treatment {
-            background: rgba(15, 118, 110, 0.25);
-            color: #2dd4bf;
-        }
-
         /* Clinic Gallery Lightbox Modal */
         .gallery-modal-overlay {
             position: fixed;
@@ -1975,15 +1895,6 @@
             </div>
         </section>
 
-        <!-- Verified Patient Reviews (Dynamic / Local Feedback) -->
-        <section class="local-reviews-section" id="localReviewsSection" style="display: none;">
-            <div class="section-header">
-                <h2 class="section-title">Verified Patient <span class="gradient-text">Reviews</span></h2>
-                <p class="section-subtitle">Real experiences and verified recovery feedback from our patients.</p>
-            </div>
-            <div class="local-reviews-grid" id="localReviewsGrid"></div>
-        </section>
-
         <!-- Video Reviews Section (Watch Healing) -->
         <section class="video-section">
             <div class="section-header">
@@ -2372,7 +2283,6 @@
             let activePhotoIndices = new Set();
             let poolCursor = 0;
             let rotationTimer = null;
-            let isUserHovering = false;
             let pairCycleStep = 0;
 
             function escapeHtml(str) {
@@ -2460,14 +2370,6 @@
 
                 poolCursor = slotCount % galleryItems.length;
 
-                // Setup hover / touch pause
-                grid.addEventListener('mouseenter', () => { isUserHovering = true; });
-                grid.addEventListener('mouseleave', () => { isUserHovering = false; });
-                grid.addEventListener('touchstart', () => { isUserHovering = true; }, { passive: true });
-                grid.addEventListener('touchend', () => { 
-                    setTimeout(() => { isUserHovering = false; }, 3000); 
-                });
-
                 if (galleryItems.length > slotCount) {
                     startAutoRotation();
                 }
@@ -2527,7 +2429,7 @@
             }
 
             function rotatePair() {
-                if (isUserHovering || modal.classList.contains('active')) return;
+                if (modal.classList.contains('active')) return;
                 if (slotState.length < 2) return;
 
                 // Cycle pairs: [0, 3], [1, 4], [2, 5]
@@ -2653,50 +2555,27 @@
             setInterval(updateClinicStatus, 30000);
         })();
 
-        // Display locally submitted patient reviews if present
+        // Scroll Reveal Entrance Animation for 6 Trust & Stat Cards
         (function() {
-            const STORAGE_KEY = 'dr_naeem_local_patient_reviews';
-            try {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                if (!saved) return;
-                const reviews = JSON.parse(saved);
-                if (!reviews || !reviews.length) return;
+            const grid = document.querySelector('.stat-cards-grid');
+            if (!grid) return;
+            const cards = grid.querySelectorAll('.pastel-stat-card');
+            if (!cards.length) return;
 
-                const section = document.getElementById('localReviewsSection');
-                const grid = document.getElementById('localReviewsGrid');
-                if (!section || !grid) return;
-
-                function escapeHtml(str) {
-                    if (!str) return '';
-                    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-                }
-
-                grid.innerHTML = '';
-                reviews.forEach(item => {
-                    const initial = item.name ? item.name.charAt(0).toUpperCase() : 'P';
-                    let starsHtml = '';
-                    for (let i = 1; i <= 5; i++) {
-                        starsHtml += `<i class="fas fa-star" style="color: ${i <= item.rating ? '#f59e0b' : '#cbd5e1'};"></i>`;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        cards.forEach(card => card.classList.add('animate-in'));
+                        observer.unobserve(entry.target);
                     }
-                    const card = document.createElement('div');
-                    card.className = 'local-review-card';
-                    card.innerHTML = `
-                        <div class="local-review-header">
-                            <div class="local-review-avatar">${initial}</div>
-                            <div>
-                                <div class="local-review-name">${escapeHtml(item.name)} <i class="fas fa-check-circle" style="color:#0284c7;" title="Verified Patient"></i></div>
-                                <div class="local-review-sub">${escapeHtml(item.city || 'Aurangabad')} &bull; Verified Google Review</div>
-                            </div>
-                        </div>
-                        <div class="local-review-stars">${starsHtml} <span class="local-review-time">${escapeHtml(item.time || 'Recently')}</span></div>
-                        <div class="local-review-text">${escapeHtml(item.message)}</div>
-                        ${item.treatment ? `<div class="local-review-treatment"><i class="fas fa-bone"></i> ${escapeHtml(item.treatment)}</div>` : ''}
-                    `;
-                    grid.appendChild(card);
                 });
+            }, {
+                root: null,
+                threshold: 0.15,
+                rootMargin: '0px 0px -20px 0px'
+            });
 
-                section.style.display = 'block';
-            } catch(e) {}
+            observer.observe(grid);
         })();
     </script>
 </body>
