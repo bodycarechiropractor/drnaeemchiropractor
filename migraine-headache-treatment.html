@@ -17,92 +17,179 @@
     <meta property="og:site_name" content="Bodycare Chiropractic & Spine Centre">
     <meta property="og:locale" content="en_IN">
 
-    <!-- Schema Markup (JSON-LD) for LocalBusiness -->
+    <!-- Schema Markup (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "MedicalBusiness",
-      "name": "Bodycare Chiropractic & Spine Centre",
-      "image": "https://www.drnaeemchiropractor.in/og-image.jpg",
-      "url": "https://bodycarechiropractic.in",
-      "telephone": "+918888838415",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "First Floor, Mediseva Medical, Prozone Mall Road, Town Centre N1 Cidco",
-        "addressLocality": "Chhatrapati Sambhajinagar (Aurangabad)",
-        "addressRegion": "Maharashtra",
-        "postalCode": "431003",
-        "addressCountry": "IN"
-      }
+      "@graph": [
+        {
+          "@type": "MedicalBusiness",
+          "@id": "https://www.drnaeemchiropractor.in/#clinic",
+          "name": "Dr. Naeem Chiropractor",
+          "legalName": "Bodycare Chiropractic & Spine Centre",
+          "url": "https://www.drnaeemchiropractor.in",
+          "image": "https://www.drnaeemchiropractor.in/og-image.jpg",
+          "telephone": "+91-8888838415",
+          "priceRange": "₹₹",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "First Floor, Mediseva Medical, Prozone Mall Road, Town Centre N1 Cidco",
+            "addressLocality": "Chhatrapati Sambhajinagar (Aurangabad)",
+            "addressRegion": "Maharashtra",
+            "postalCode": "431003",
+            "addressCountry": "IN"
+          }
+        },
+        {
+          "@type": "MedicalWebPage",
+          "@id": "https://www.drnaeemchiropractor.in/migraine-headache-treatment#webpage",
+          "url": "https://www.drnaeemchiropractor.in/migraine-headache-treatment",
+          "name": "Migraine & Headache Treatment by Dr. Naeem Shaikh",
+          "description": "Drug-free, non-surgical chiropractic adjustments for migraine and headache relief in Aurangabad."
+        }
+      ]
     }
     </script>
+
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
-        /* CSS resets and variables matching index.html */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        img {
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
             color: #1e293b;
             background: #f8fafc;
             padding-bottom: 0;
             transition: background 0.3s, color 0.3s;
-            user-select: none;
-            -webkit-user-select: none;
         }
+
         body.dark-mode {
             background: #0f172a;
             color: #e2e8f0;
         }
-        .container { max-width: 800px; margin: 0 auto; padding: 24px 16px; }
-        
-        /* Navbar */
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Gradient Text Helper */
+        .gradient-text {
+            background: linear-gradient(135deg, #0f766e 0%, #0284c7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body.dark-mode .gradient-text {
+            background: linear-gradient(135deg, #34d399 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Navbar - Matching index.html with Frosted Glass */
         .navbar {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: transparent;
+            box-shadow: none;
+            border-bottom: 1px solid transparent;
             padding: 12px 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            transition: background 0.3s;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
         }
-        body.dark-mode .navbar { background: #1e293b; }
-        .navbar .container { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; }
-        .logo-area { display: flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; }
-        .logo-img {
-            width: 40px; height: 40px; border-radius: 10px; object-fit: cover;
-            background: #0f766e; display: flex; align-items: center; justify-content: center;
-            color: white; font-weight: bold; font-size: 20px;
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
         }
-        .logo-img img { width: 100%; height: 100%; border-radius: 10px; display: block; }
-        .logo-text { font-size: 1.1rem; font-weight: 700; color: #0f766e; line-height: 1.2; }
-        body.dark-mode .logo-text { color: #34d399; }
-        .logo-text span { font-size: 0.7rem; font-weight: 400; color: #64748b; display: block; }
-        body.dark-mode .logo-text span { color: #cbd5e1; }
-        .back-btn {
-            background: #0f766e;
-            color: white;
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: opacity 0.2s;
+        body.dark-mode .navbar {
+            background: transparent;
+            box-shadow: none;
+            border-bottom: 1px solid transparent;
         }
-        .back-btn:hover { opacity: 0.9; }
-
-        .nav-controls {
+        body.dark-mode .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .navbar .container {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 12px;
         }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .logo-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 0 12px rgba(15, 118, 110, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            border-radius: 11px;
+            display: block;
+            object-fit: cover;
+        }
+        .logo-text {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #0f766e;
+            line-height: 1.15;
+        }
+        body.dark-mode .logo-text { color: #34d399; }
+        .logo-text span {
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: #64748b;
+            display: block;
+            margin-top: 2px;
+        }
+        body.dark-mode .logo-text span { color: #94a3b8; }
 
-        /* Language Toggle styling */
+        /* Nav Right Controls */
+        .nav-right-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Language Switcher */
         .lang-switch {
             display: flex;
             background: #e2e8f0;
@@ -118,11 +205,11 @@
             background: none;
             border: none;
             color: #475569;
-            padding: 5px 12px;
-            font-size: 0.8rem;
+            padding: 5px 10px;
+            font-size: 0.78rem;
             font-weight: 700;
             cursor: pointer;
-            border-radius: 18px;
+            border-radius: 16px;
             transition: all 0.2s ease;
         }
         body.dark-mode .lang-btn {
@@ -137,18 +224,17 @@
             color: #0f172a;
         }
 
+
+
+
+
         /* Language visibility logic */
-        .lang-mr {
-            display: none !important;
-        }
-        body.lang-mr-active .lang-en {
-            display: none !important;
-        }
-        body.lang-mr-active .lang-mr {
-            display: inline !important;
-        }
+        .lang-mr { display: none !important; }
+        body.lang-mr-active .lang-en { display: none !important; }
+        body.lang-mr-active .lang-mr { display: inline !important; }
         body.lang-mr-active h1 .lang-mr,
         body.lang-mr-active h2 .lang-mr,
+        body.lang-mr-active h3 .lang-mr,
         body.lang-mr-active p .lang-mr,
         body.lang-mr-active div .lang-mr,
         body.lang-mr-active li .lang-mr,
@@ -160,193 +246,461 @@
             display: block !important;
         }
 
-        .brand-highlight {
-            display: inline-block;
-            background: #fef2f2;
-            color: #b91c1c;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 1.15rem;
-            margin-top: 10px;
-            box-shadow: 0 2px 4px rgba(185, 28, 28, 0.05);
-            border: 1px solid rgba(185, 28, 28, 0.15);
-        }
-        body.dark-mode .brand-highlight {
-            background: #450a0a;
-            color: #fca5a5;
-            border-color: rgba(239, 68, 68, 0.2);
-        }
-
-        /* Hero */
-        .hero {
-            background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 100%);
-            padding: 40px 16px;
+        /* Hero Section - Matching index.html */
+        .hero-section {
+            background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 50%, #e0f2fe 100%);
+            margin-top: -68px;
+            padding: 92px 16px 40px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
             border-bottom: 1px solid #e2e8f0;
-            transition: background 0.3s, border 0.3s;
+            transition: background 0.3s;
         }
-        body.dark-mode .hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        body.dark-mode .hero-section {
+            background: radial-gradient(120% 100% at 50% 0%, #1e3a5f 0%, #0f172a 55%, #070c1b 100%);
             border-bottom-color: #334155;
         }
-        .hero h1 {
-            font-size: 2.2rem;
-            color: #0f766e;
-            font-weight: 800;
-            margin-bottom: 12px;
-            line-height: 1.2;
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 16px;
+            padding: 4px 14px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
-        body.dark-mode .hero h1 { color: #34d399; }
-        .hero p {
-            font-size: 1.1rem;
-            color: #475569;
-            margin-bottom: 24px;
-            max-width: 600px;
+        body.dark-mode .breadcrumbs {
+            background: rgba(30, 41, 59, 0.7);
+            color: #94a3b8;
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        .breadcrumbs a {
+            color: #0f766e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        body.dark-mode .breadcrumbs a { color: #34d399; }
+        .breadcrumbs .separator {
+            font-size: 0.65rem;
+            opacity: 0.6;
+        }
+        .breadcrumbs .current {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        body.dark-mode .breadcrumbs .current { color: #f1f5f9; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #0f766e 0%, #0284c7 100%);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25);
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.22;
+            margin-bottom: 12px;
+            max-width: 820px;
             margin-left: auto;
             margin-right: auto;
         }
-        body.dark-mode .hero p { color: #cbd5e1; }
+        body.dark-mode .hero-title { color: #f8fafc; }
 
-        /* Button Grid */
-        .cta-grid {
+        .hero-subtext {
+            font-size: 1.05rem;
+            color: #475569;
+            margin-bottom: 18px;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        body.dark-mode .hero-subtext { color: #cbd5e1; }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fef2f2;
+            color: #b91c1c;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            margin-bottom: 24px;
+            border: 1px solid rgba(185, 28, 28, 0.15);
+            box-shadow: 0 2px 6px rgba(185, 28, 28, 0.06);
+        }
+        body.dark-mode .brand-badge {
+            background: #450a0a;
+            color: #fca5a5;
+            border-color: rgba(239, 68, 68, 0.25);
+        }
+
+        /* Hero CTA Buttons */
+        .hero-cta-group {
             display: flex;
             gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
         }
-        .btn-cta {
+        .btn-hero {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 12px 24px;
+            padding: 12px 26px;
             border-radius: 30px;
             font-weight: 700;
+            font-size: 0.95rem;
             text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
+            transition: all 0.2s ease;
         }
-        .btn-cta:hover { transform: translateY(-2px); }
-        .btn-cta.call { background: #0f766e; color: white; }
-        .btn-cta.whatsapp { background: #25D366; color: white; }
+        .btn-hero.call {
+            background: linear-gradient(135deg, #0f766e 0%, #0d9488 100%);
+            color: white;
+            box-shadow: 0 6px 16px rgba(15, 118, 110, 0.3);
+        }
+        .btn-hero.call:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(15, 118, 110, 0.4);
+        }
+        .btn-hero.whatsapp {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+        }
+        .btn-hero.whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
 
-        /* Content */
+        /* Main Content Section */
         .content-section {
-            padding: 40px 0;
+            padding: 36px 0;
         }
+
+        /* Doctor Consultation Card - Clean & Modern (NO QUALIFICATION) */
+        .doctor-consult-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+            border: 1px solid #bbf7d0;
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 24px rgba(15, 118, 110, 0.08);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        body.dark-mode .doctor-consult-card {
+            background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
+            border-color: #047857;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+        .doctor-card-body {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .doctor-avatar-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .doctor-avatar {
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #0f766e;
+            box-shadow: 0 4px 14px rgba(15, 118, 110, 0.25);
+            display: block;
+        }
+        body.dark-mode .doctor-avatar {
+            border-color: #34d399;
+        }
+        .doc-online-dot {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            width: 14px;
+            height: 14px;
+            background: #22c55e;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+        body.dark-mode .doc-online-dot { border-color: #0f172a; }
+        .doctor-details {
+            flex: 1;
+            min-width: 240px;
+        }
+        .doctor-role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(15, 118, 110, 0.12);
+            color: #0f766e;
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
+            margin-bottom: 6px;
+        }
+        body.dark-mode .doctor-role-badge {
+            background: rgba(52, 211, 153, 0.2);
+            color: #34d399;
+        }
+        .doctor-name {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+        body.dark-mode .doctor-name { color: #f8fafc; }
+        .doctor-clinic-desc {
+            font-size: 0.92rem;
+            color: #475569;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        body.dark-mode .doctor-clinic-desc { color: #cbd5e1; }
+        
+        .doctor-perks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .doc-perk-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #0f766e;
+            background: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(15, 118, 110, 0.15);
+        }
+        body.dark-mode .doc-perk-item {
+            background: #1e293b;
+            color: #34d399;
+            border-color: rgba(52, 211, 153, 0.25);
+        }
+
+        /* Modern Card Styling */
         .card {
             background: white;
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
             border: 1px solid #e2e8f0;
             margin-bottom: 24px;
-            transition: background 0.3s, border 0.3s;
+            transition: background 0.3s, border-color 0.3s, transform 0.2s, box-shadow 0.2s;
         }
         body.dark-mode .card {
             background: #1e293b;
             border-color: #334155;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
         }
-        .card h2 {
-            font-size: 1.5rem;
+        .card:hover {
+            box-shadow: 0 8px 26px rgba(0, 0, 0, 0.06);
+        }
+        body.dark-mode .card:hover {
+            box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35);
+        }
+
+        .card-header-title {
+            font-size: 1.45rem;
             color: #0f766e;
-            margin-bottom: 16px;
-            font-weight: 700;
+            margin-bottom: 18px;
+            font-weight: 800;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
-        body.dark-mode .card h2 { color: #34d399; }
+        body.dark-mode .card-header-title { color: #34d399; }
+        .card-header-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(15, 118, 110, 0.1);
+            color: #0f766e;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        body.dark-mode .card-header-icon {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+        }
+
         .card p {
             margin-bottom: 16px;
             color: #334155;
+            font-size: 0.98rem;
+            line-height: 1.65;
         }
         body.dark-mode .card p { color: #cbd5e1; }
-        .card ul {
+
+        /* List Styling in Cards */
+        .symptoms-list, .approach-list {
             list-style: none;
             padding-left: 0;
             margin-bottom: 16px;
+            display: grid;
+            gap: 12px;
         }
-        .card li {
-            margin-bottom: 10px;
+        .list-item {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            gap: 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 14px 16px;
+            border-radius: 16px;
             color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            transition: all 0.2s ease;
         }
-        body.dark-mode .card li { color: #cbd5e1; }
-        .card li i {
-            color: #c62828;
-            margin-top: 4px;
+        body.dark-mode .list-item {
+            background: #0f172a;
+            border-color: #334155;
+            color: #cbd5e1;
         }
-        body.dark-mode .card li i { color: #ef5350; }
+        .list-item:hover {
+            border-color: #cbd5e1;
+            transform: translateX(3px);
+        }
+        body.dark-mode .list-item:hover {
+            border-color: #475569;
+        }
+        .list-item-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .icon-warning {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+        body.dark-mode .icon-warning {
+            background: #450a0a;
+            color: #f87171;
+        }
+        .icon-check {
+            background: #dcfce7;
+            color: #10b981;
+        }
+        body.dark-mode .icon-check {
+            background: #064e3b;
+            color: #34d399;
+        }
+        .list-item strong {
+            color: #0f172a;
+            font-weight: 700;
+        }
+        body.dark-mode .list-item strong { color: #f1f5f9; }
 
-        /* Info boxes */
+        /* Highlight Info Box */
         .info-box {
-            background: #f0fdf4;
-            border-left: 4px solid #0f766e;
-            padding: 16px;
-            border-radius: 8px;
-            margin-top: 16px;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+            border-left: 5px solid #0f766e;
+            padding: 18px 20px;
+            border-radius: 14px;
+            margin-top: 20px;
+            color: #1e293b;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
         body.dark-mode .info-box {
-            background: #112e27;
+            background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
             border-left-color: #34d399;
+            color: #e2e8f0;
         }
 
-        /* Footer */
+
+
+        /* Footer - Matching index.html */
         footer {
-            text-align: center;
+            background: white;
+            border-top: 1px solid #e2e8f0;
             padding: 24px 0;
+            text-align: center;
             color: #64748b;
-            background: #f1f5f9;
+            font-size: 0.85rem;
             margin-top: 40px;
-            transition: background 0.3s, color 0.3s;
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
         }
-        body.dark-mode footer { background: #1e293b; color: #94a3b8; }
-
-        img {
-            -webkit-touch-callout: none;
-            -webkit-user-drag: none;
-            user-select: none;
-            -webkit-user-select: none;
+        body.dark-mode footer {
+            background: #1e293b;
+            border-top-color: #334155;
+            color: #94a3b8;
         }
 
-        /* Mobile Header Responsiveness Optimization */
+        /* Responsive Optimization */
         @media (max-width: 600px) {
             .navbar { padding: 10px 0; }
             .logo-area { gap: 8px; }
-            .logo-img { width: 36px; height: 36px; font-size: 18px; border-radius: 8px; }
-            .logo-img img { border-radius: 8px; }
+            .logo-img { width: 38px; height: 38px; font-size: 18px; border-radius: 10px; }
             .logo-text { font-size: 1.0rem; }
-            .logo-text span { display: block !important; font-size: 0.65rem; }
-            .navbar .container { gap: 8px; justify-content: space-between; align-items: center; }
-            .nav-controls {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                gap: 6px;
-            }
-            .back-btn { padding: 6px 12px; font-size: 0.75rem; border-radius: 12px; }
-            .back-btn .back-text { display: inline !important; }
-            .lang-switch { border-radius: 12px; }
-            .lang-btn { padding: 3px 6px; font-size: 0.7rem; border-radius: 10px; }
+            .logo-text span { font-size: 0.65rem; }
+            
+            .hero-title { font-size: 1.65rem; }
+            .hero-subtext { font-size: 0.92rem; }
+            .hero-badge { font-size: 0.72rem; padding: 4px 12px; }
+            .brand-badge { font-size: 0.82rem; padding: 4px 12px; }
 
-            /* Force CTA buttons into a single row on all mobile devices */
-            .cta-grid {
-                flex-wrap: nowrap !important;
+            .hero-cta-group {
+                flex-wrap: nowrap;
                 gap: 8px;
             }
-            .btn-cta {
+            .btn-hero {
                 flex: 1;
                 justify-content: center;
                 padding: 10px 8px;
                 font-size: 0.82rem;
                 white-space: nowrap;
-                gap: 6px;
             }
+
+            .card { padding: 20px 16px; border-radius: 18px; }
+            .card-header-title { font-size: 1.25rem; }
+
+            .doctor-consult-card { padding: 18px 16px; }
+            .doctor-avatar { width: 70px; height: 70px; }
+            .doctor-name { font-size: 1.2rem; }
         }
+
+
     </style>
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -357,63 +711,120 @@
 </head>
 <body>
 
-    <!-- Navbar -->
+    <!-- Navbar - Matching index.html with Frosted Glass -->
     <header class="navbar">
         <div class="container">
             <a href="index.html" class="logo-area">
                 <div class="logo-img">
-                    <img src="logo.png" alt="Dr. Naeem Chiropractor Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="logo.png?v=2" alt="Dr. Naeem Chiropractor Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <i class="fas fa-spa" style="display:none;"></i>
                 </div>
-                <div class="logo-text">Dr. Naeem Chiropractor<span>“Freedom From Pain — Naturally”</span></div>
+                <div class="logo-text">
+                    Dr. Naeem Chiropractor
+                    <span>"Freedom from Pain - Naturally"</span>
+                </div>
             </a>
-            <div class="nav-controls">
+
+            <div class="nav-right-actions">
+                <!-- Language Toggle -->
                 <div class="lang-switch">
                     <button class="lang-btn active" id="langEnBtn" onclick="setLanguage('en')">EN</button>
                     <button class="lang-btn" id="langMrBtn" onclick="setLanguage('mr')">मराठी</button>
                 </div>
-                <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> <span class="back-text">Home</span></a>
             </div>
         </div>
     </header>
 
-    <!-- Hero -->
-    <section class="hero">
+    <!-- Hero Section - Matching index.html -->
+    <section class="hero-section">
         <div class="container">
-            <h1>
-                <span class="lang-en">Migraine & Headache Treatment in Aurangabad (Chhatrapati Sambhajinagar)</span>
-                <span class="lang-mr">औरंगाबाद (छत्रपती संभाजीनगर) मध्ये मायग्रेन आणि डोकेदुखीचे उपचार</span>
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <i class="fas fa-chevron-right separator"></i>
+                <span>Treatments</span>
+                <i class="fas fa-chevron-right separator"></i>
+                <span class="current">Migraine & Headache</span>
+            </div>
+
+            <!-- Pill Badge -->
+            <div class="hero-badge">
+                <i class="fas fa-brain"></i>
+                <span class="lang-en">Non-Surgical Headache & Migraine Relief</span>
+                <span class="lang-mr">विनाऑपरेशन मायग्रेन व डोकेदुखी उपचार</span>
+            </div>
+
+            <!-- Main Title -->
+            <h1 class="hero-title">
+                <span class="lang-en">Migraine & Headache <span class="gradient-text">Treatment</span> in Aurangabad</span>
+                <span class="lang-mr">औरंगाबाद (छत्रपती संभाजीनगर) मध्ये <span class="gradient-text">मायग्रेन आणि डोकेदुखी</span> उपचार</span>
             </h1>
-            <p>
-                <span class="lang-en">Drug-Free, Non-Surgical Care for Migraine & Headache<br><span class="brand-highlight">at Bodycare Chiropractic</span></span>
-                <span class="lang-mr">मायग्रेन आणि तीव्र डोकेदुखीसाठी विनाऔषध, विनाऑपरेशन नैसर्गिक उपचार<br><span class="brand-highlight">बॉडीकेअर कायरोप्रॅक्टिक येथे</span></span>
+
+            <!-- Subtitle -->
+            <p class="hero-subtext">
+                <span class="lang-en">Drug-Free, Non-Surgical Chiropractic Care focused on root-cause relief, neck mobility, and lasting comfort.</span>
+                <span class="lang-mr">मायग्रेन आणि तीव्र डोकेदुखीसाठी विनाऔषध, विनाऑपरेशन नैसर्गिक कायरोप्रॅक्टिक उपचार.</span>
             </p>
-            <div class="cta-grid">
-                <a href="tel:+918888838415" class="btn-cta call"><i class="fas fa-phone-alt"></i> <span class="lang-en">Call Now</span><span class="lang-mr">कॉल करा</span></a>
-                <a href="https://wa.me/918888838415?text=Hello%20Dr.%20Naeem,%20I%20want%20to%20book%20an%20appointment%20for%20Migraine%20and%20Headache%20Treatment." target="_blank" rel="noopener noreferrer" class="btn-cta whatsapp"><i class="fab fa-whatsapp"></i> <span class="lang-en">Book on WhatsApp</span><span class="lang-mr">व्हट्सॲपवर बुक करा</span></a>
+
+            <!-- Brand Clinic Highlight Badge -->
+            <div class="brand-badge">
+                <i class="fas fa-clinic-medical"></i>
+                <span class="lang-en">at Bodycare Chiropractic & Spine Centre</span>
+                <span class="lang-mr">बॉडीकेअर कायरोप्रॅक्टिक येथे</span>
+            </div>
+
+            <!-- Hero Action Buttons -->
+            <div class="hero-cta-group">
+                <a href="tel:+918888838415" class="btn-hero call">
+                    <i class="fas fa-phone-alt"></i>
+                    <span class="lang-en">Call Now</span>
+                    <span class="lang-mr">कॉल करा</span>
+                </a>
+                <a href="https://wa.me/918888838415?text=Hello%20Dr.%20Naeem,%20I%20want%20to%20book%20an%20appointment%20for%20Migraine%20and%20Headache%20Treatment." target="_blank" rel="noopener noreferrer" class="btn-hero whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span class="lang-en">Book an Appointment</span>
+                    <span class="lang-mr">अपॉइंटमेंट बुक करा</span>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Content -->
+    <!-- Main Content -->
     <main class="container content-section">
 
-        <!-- Doctor Profile Callout -->
-        <div class="card" style="background: linear-gradient(135deg, #f0fdf4 0%, #e6f7f5 100%); border: 1px solid #bbf7d0;">
-            <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-                <img src="dr.png" alt="Dr. Naeem Shaikh" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid #0f766e; flex-shrink: 0;">
-                <div>
-                    <h3 style="font-size: 1.15rem; color: #0f766e; margin-bottom: 4px;"><i class="fas fa-user-md"></i> Consult Dr. Naeem Shaikh</h3>
-                    <p style="font-size: 0.9rem; color: #475569; margin: 0;">Chiropractor & Spine Care Expert treating patients at Bodycare Chiropractic & Spine Centre, N-1 CIDCO, Aurangabad.</p>
+        <!-- Doctor Profile Card (NO QUALIFICATION, CLEAN DESIGN) -->
+        <div class="doctor-consult-card">
+            <div class="doctor-card-body">
+                <div class="doctor-avatar-wrap">
+                    <img src="dr.png" alt="Dr. Naeem Shaikh" class="doctor-avatar">
+                    <span class="doc-online-dot"></span>
+                </div>
+                <div class="doctor-details">
+                    <div class="doctor-role-badge">
+                        <i class="fas fa-user-md"></i> Senior Consultant Chiropractor
+                    </div>
+                    <h2 class="doctor-name">Dr. Naeem Shaikh</h2>
+                    <p class="doctor-clinic-desc">
+                        <span class="lang-en">Chiropractor & Spine Care Expert treating patients at Bodycare Chiropractic & Spine Centre, N-1 CIDCO, Chhatrapati Sambhajinagar (Aurangabad).</span>
+                        <span class="lang-mr">बॉडीकेअर कायरोप्रॅक्टिक आणि स्पाइन सेंटर, N-1 सिडको, औरंगाबाद येथे कायरोप्रॅक्टिक आणि स्पाइन केअर तज्ज्ञ.</span>
+                    </p>
+                    <div class="doctor-perks">
+                        <span class="doc-perk-item"><i class="fas fa-check-circle"></i> Free Consultation</span>
+                        <span class="doc-perk-item"><i class="fas fa-clock"></i> 10+ Years Experience</span>
+                        <span class="doc-perk-item"><i class="fas fa-shield-alt"></i> 100% Non-Surgical</span>
+                    </div>
                 </div>
             </div>
         </div>
         
         <!-- Card 1: Understanding Migraine & Headache -->
         <div class="card">
-            <h2>
-                <span class="lang-en"><i class="fas fa-notes-medical"></i> Understanding Migraine & Headache</span>
-                <span class="lang-mr"><i class="fas fa-notes-medical"></i> मायग्रेन आणि डोकेदुखी समजून घ्या</span>
+            <h2 class="card-header-title">
+                <span class="card-header-icon"><i class="fas fa-notes-medical"></i></span>
+                <span>
+                    <span class="lang-en">Understanding Migraine & Headache</span>
+                    <span class="lang-mr">मायग्रेन आणि डोकेदुखी समजून घ्या</span>
+                </span>
             </h2>
             <p class="lang-en">Migraine and headaches can cause pain, pressure, sensitivity to light or sound, nausea, neck discomfort and difficulty concentrating. Symptoms can vary from person to person and may be influenced by factors such as stress, posture, muscle tension, sleep patterns or other underlying causes.</p>
             <p class="lang-mr">मायग्रेन आणि डोकेदुखीमुळे तीव्र वेदना, डोक्यावर दाब, प्रकाश किंवा आवाजाची संवेदनशीलता (sensitivity), मळमळ, मानेचा त्रास आणि एकाग्रतेचा अभाव होऊ शकतो. ही लक्षणे व्यक्तीनुसार बदलू शकतात आणि तणाव, चुकीचे पोश्चर, स्नायूंचा ताण, झोपेचे असंतुलन किंवा इतर कारणांमुळे उद्भवू शकतात.</p>
@@ -423,111 +834,145 @@
 
         <!-- Card 2: Symptoms We Treat -->
         <div class="card">
-            <h2>
-                <span class="lang-en"><i class="fas fa-check-circle"></i> Symptoms We Treat</span>
-                <span class="lang-mr"><i class="fas fa-check-circle"></i> आम्ही उपचार करत असलेली लक्षणे</span>
+            <h2 class="card-header-title">
+                <span class="card-header-icon"><i class="fas fa-check-circle"></i></span>
+                <span>
+                    <span class="lang-en">Symptoms We Treat</span>
+                    <span class="lang-mr">आम्ही उपचार करत असलेली लक्षणे</span>
+                </span>
             </h2>
-            <ul>
-                <li><i class="fas fa-exclamation-triangle"></i> 
-                    <span>
+            <div class="symptoms-list">
+                <div class="list-item">
+                    <span class="list-item-icon icon-warning"><i class="fas fa-exclamation"></i></span>
+                    <div>
                         <span class="lang-en"><strong>Migraine Episodes</strong>: Recurrent throbbing pain often accompanied by sensory sensitivity or nausea.</span>
                         <span class="lang-mr"><strong>मायग्रेनच्या तीव्र झोडी</strong>: एका बाजूला ठसठसणाऱ्या कळा, मळमळ आणि संवेदनशीलता.</span>
-                    </span>
-                </li>
-                <li><i class="fas fa-exclamation-triangle"></i> 
-                    <span>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <span class="list-item-icon icon-warning"><i class="fas fa-exclamation"></i></span>
+                    <div>
                         <span class="lang-en"><strong>Tension Headaches</strong>: Dull, aching head pain or tight band sensation around the forehead and temples.</span>
                         <span class="lang-mr"><strong>तणावामुळे होणारी डोकेदुखी</strong>: डोक्याभोवती घट्ट पट्टी बांधल्यासारखा ताण आणि मंद वेदना.</span>
-                    </span>
-                </li>
-                <li><i class="fas fa-exclamation-triangle"></i> 
-                    <span>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <span class="list-item-icon icon-warning"><i class="fas fa-exclamation"></i></span>
+                    <div>
                         <span class="lang-en"><strong>Head and Neck Discomfort</strong>: Persistent soreness extending from the upper cervical region into the skull base.</span>
                         <span class="lang-mr"><strong>डोके आणि मानेमधील अस्वस्थता</strong>: मानेच्या वरच्या भागापासून डोक्याच्या मागील भागापर्यंत जाणारा सततचा त्रास.</span>
-                    </span>
-                </li>
-                <li><i class="fas fa-exclamation-triangle"></i> 
-                    <span>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <span class="list-item-icon icon-warning"><i class="fas fa-exclamation"></i></span>
+                    <div>
                         <span class="lang-en"><strong>Headaches Associated with Neck Stiffness</strong>: Cervicogenic headaches triggered by joint restriction in the upper neck.</span>
                         <span class="lang-mr"><strong>मानेच्या कडकपणाशी संबंधित डोकेदुखी</strong>: मान वळवताना किंवा मानेच्या मणक्यांमधील ताणामुळे सुरू होणारी डोकेदुखी.</span>
-                    </span>
-                </li>
-                <li><i class="fas fa-exclamation-triangle"></i> 
-                    <span>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <span class="list-item-icon icon-warning"><i class="fas fa-exclamation"></i></span>
+                    <div>
                         <span class="lang-en"><strong>Sensitivity to Light or Sound</strong>: Discomfort triggered by everyday bright lighting, digital screens, or loud environments.</span>
                         <span class="lang-mr"><strong>प्रकाश किंवा आवाजाची संवेदनशीलता</strong>: तीव्र प्रकाश, मोबाईल स्क्रीन किंवा आवाजामुळे डोकेदुखी वाढणे.</span>
-                    </span>
-                </li>
-                <li><i class="fas fa-exclamation-triangle"></i> 
-                    <span>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <span class="list-item-icon icon-warning"><i class="fas fa-exclamation"></i></span>
+                    <div>
                         <span class="lang-en"><strong>Headache-Related Muscle Tension</strong>: Knots and tightness in the shoulders, trapezius, and suboccipital muscles.</span>
                         <span class="lang-mr"><strong>डोकेदुखीशी संबंधित स्नायूंचा ताण</strong>: खांदे आणि मानेच्या मुळाशी स्नायूंमध्ये निर्माण होणारा तीव्र कडकपणा.</span>
-                    </span>
-                </li>
-            </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Card 3: Treatment Approach -->
         <div class="card">
-            <h2>
-                <span class="lang-en"><i class="fas fa-stethoscope"></i> Treatment Approach</span>
-                <span class="lang-mr"><i class="fas fa-stethoscope"></i> आमचा उपचार दृष्टिकोण</span>
+            <h2 class="card-header-title">
+                <span class="card-header-icon"><i class="fas fa-stethoscope"></i></span>
+                <span>
+                    <span class="lang-en">Treatment Approach</span>
+                    <span class="lang-mr">आमचा उपचार दृष्टिकोण</span>
+                </span>
             </h2>
             <p class="lang-en">Our approach focuses on personalized, non-invasive and drug-free care. We assess your condition and create a treatment plan designed to help reduce discomfort, improve mobility and support better movement.</p>
             <p class="lang-mr">आमचा दृष्टिकोन वैयक्तिक, सुरक्षित आणि विनाऔषध उपचारांवर केंद्रित आहे. आम्ही तुमच्या त्रासाचे सखोल परीक्षण करतो आणि अस्वस्थता कमी करण्यासाठी, मोबिलिटी वाढवण्यासाठी आणि उत्तम नैसर्गिक हालचालीस समर्थन देण्यासाठी विशेष उपचार योजना तयार करतो.</p>
-            <ul>
-                <li><i class="fas fa-circle-notch"></i> 
-                    <span>
+            
+            <div class="approach-list">
+                <div class="list-item">
+                    <span class="list-item-icon icon-check"><i class="fas fa-check"></i></span>
+                    <div>
                         <span class="lang-en"><strong>Cervical & Upper Back Care</strong>: Gentle techniques to improve neck and upper-back mobility and support comfortable movement.</span>
                         <span class="lang-mr"><strong>मानेची व पाठीच्या वरच्या भागाची काळजी</strong>: मान आणि पाठीच्या वरच्या भागाची हालचाल सुधारण्यासाठी आणि आरामदायक हालचालीस मदत करण्यासाठी हलकी व सुरक्षित कायरोप्रॅक्टिक तंत्रे.</span>
-                    </span>
-                </li>
-                <li><i class="fas fa-circle-notch"></i> 
-                    <span>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <span class="list-item-icon icon-check"><i class="fas fa-check"></i></span>
+                    <div>
                         <span class="lang-en"><strong>Postural Correction</strong>: Personalized guidance to improve posture, movement patterns and reduce unnecessary strain on the neck and upper back.</span>
                         <span class="lang-mr"><strong>पोश्चर सुधारणा (Postural Correction)</strong>: शरीराचे पोश्चर सुधारण्यासाठी, हालचालींची पद्धत योग्य करण्यासाठी आणि मान व पाठीवरील अनावश्यक ताण कमी करण्यासाठी वैयक्तिक मार्गदर्शन.</span>
-                    </span>
-                </li>
-                <li><i class="fas fa-circle-notch"></i> 
-                    <span>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <span class="list-item-icon icon-check"><i class="fas fa-check"></i></span>
+                    <div>
                         <span class="lang-en"><strong>Soft Tissue & Muscle Therapy</strong>: Techniques designed to reduce muscle tension and support comfortable movement.</span>
                         <span class="lang-mr"><strong>सॉफ्ट टिशू आणि स्नायू थेरपी</strong>: स्नायूंचा ताण कमी करण्यासाठी आणि सुखकर हालचालींना चालना देण्यासाठी डिझाइन केलेली अचूक तंत्रे.</span>
-                    </span>
-                </li>
-                <li><i class="fas fa-circle-notch"></i> 
-                    <span>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <span class="list-item-icon icon-check"><i class="fas fa-check"></i></span>
+                    <div>
                         <span class="lang-en"><strong>Complementary Therapies</strong>: To speed up recovery and reduce muscle spasms, we integrate clinical Acupuncture and Dry Cupping Therapy based on patient needs.</span>
                         <span class="lang-mr"><strong>पूरक उपचार (Complementary Therapies)</strong>: जलद बरे होण्यासाठी आणि स्नायूंचे आकुंचन दूर करण्यासाठी, आम्ही रुग्णाच्या गरजेनुसार क्लिनिकल ॲक्युपंक्चर आणि ड्राय कपिंग थेरपी एकत्र करतो.</span>
-                    </span>
-                </li>
-            </ul>
+                    </div>
+                </div>
+            </div>
+
             <div class="info-box">
-                <span class="lang-en"><strong>Why Choose Us?</strong> Our specialized headache and migraine care approach uses personalized treatment to improve mobility, reduce discomfort and support better movement.</span>
+                <span class="lang-en"><strong>Why Choose Us?</strong> Our specialized headache and migraine care approach uses personalized treatment to improve mobility, reduce discomfort and support better movement naturally.</span>
                 <span class="lang-mr"><strong>आम्हाला का निवडावे?</strong> आमचा डोकेदुखी आणि मायग्रेनसाठीचा विशेष उपचार दृष्टिकोण हालचाल सुधारण्यासाठी, अस्वस्थता दूर करण्यासाठी आणि शरीराला नैसर्गिकरित्या बरे होण्यास मदत करण्यासाठी वैयक्तिकृत तंत्रांचा वापर करतो.</span>
             </div>
         </div>
 
     </main>
 
-    <!-- Footer -->
+    <!-- Footer - Matching index.html -->
     <footer>
         <div class="container">
-            <p>© 2025 Bodycare Chiropractic & Spine Centre | All Rights Reserved</p>
+            <p>© 2026 Dr. Naeem Chiropractor | Bodycare Chiropractic & Spine Centre. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <!-- JavaScript - Theme Toggle, Navbar Scroll, Language Switch -->
     <script>
-        // Check local storage for dark mode (Default Light)
+        // 1. Theme Sync (Sync with localStorage)
         (function() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark') {
                 document.body.classList.add('dark-mode');
             } else {
                 document.body.classList.remove('dark-mode');
             }
         })();
 
-        // Language Switch logic
+        // 2. Transparent Navbar at top, frosted glass on scroll (matching index.html)
+        (function() {
+            const navbar = document.querySelector('.navbar');
+            if (!navbar) return;
+            function onScroll() {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        })();
+
+        // 3. Language Switch logic
         function setLanguage(lang) {
             if (lang === 'mr') {
                 document.body.classList.add('lang-mr-active');
@@ -552,7 +997,7 @@
             }
         })();
 
-        // Prevent image download just in case
+        // 4. Prevent image dragging/download
         document.addEventListener('contextmenu', e => {
             if (e.target.tagName === 'IMG') e.preventDefault();
         });
