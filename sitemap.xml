@@ -56,5 +56,21 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Migraine & Headache Page -->
+  <url>
+    <loc>https://www.drnaeemchiropractor.in/migraine-headache-treatment</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Posture & Spine Page -->
+  <url>
+    <loc>https://www.drnaeemchiropractor.in/posture-spine-treatment</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   
 </urlset>
