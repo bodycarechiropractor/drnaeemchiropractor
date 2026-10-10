@@ -801,7 +801,7 @@
                 </div>
                 <div class="doctor-details">
                     <div class="doctor-role-badge">
-                        <i class="fas fa-user-md"></i> Senior Consultant Chiropractor
+                        <i class="fas fa-user-md"></i> Senior Chiropractic Consultant
                     </div>
                     <h2 class="doctor-name">Dr. Naeem Shaikh</h2>
                     <p class="doctor-clinic-desc">
@@ -811,7 +811,7 @@
                     <div class="doctor-perks">
                         <span class="doc-perk-item"><i class="fas fa-check-circle"></i> Free Consultation</span>
                         <span class="doc-perk-item"><i class="fas fa-clock"></i> 10+ Years Experience</span>
-                        <span class="doc-perk-item"><i class="fas fa-shield-alt"></i> 100% Non-Surgical</span>
+                        <span class="doc-perk-item"><i class="fas fa-shield-alt"></i> Drug-Free & Non-Surgical Care</span>
                     </div>
                 </div>
             </div>
@@ -1004,6 +1004,31 @@
         document.addEventListener('dragstart', e => {
             if (e.target.tagName === 'IMG') e.preventDefault();
         });
+
+        // 5. WhatsApp Mobile App Chooser (Triggers Android "Open with: WhatsApp / WA Business" app chooser)
+        (function() {
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (!isMobile) return;
+
+            document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+                const originalHref = link.getAttribute('href');
+                let phone = '918888838415';
+                let text = '';
+                try {
+                    const url = new URL(originalHref);
+                    phone = url.pathname.replace(/^\//, '') || '918888838415';
+                    text = url.searchParams.get('text') || '';
+                } catch(e) {}
+
+                const whatsappScheme = `whatsapp://send?phone=${phone}${text ? `&text=${encodeURIComponent(text)}` : ''}`;
+                link.setAttribute('href', whatsappScheme);
+                link.removeAttribute('target');
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = whatsappScheme;
+                });
+            });
+        })();
     </script>
 </body>
 </html>
